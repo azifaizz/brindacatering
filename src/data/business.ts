@@ -11,6 +11,11 @@
 
 const env = import.meta.env as Record<string, string | undefined>;
 
+import heroSouthIndian from "@/assets/hero-south-indian.jpg";
+import functionSouthIndian from "@/assets/function-south-indian.jpg";
+import weddingSouthIndian from "@/assets/wedding-south-indian.jpg";
+import dessertsImage from "@/assets/desserts.jpg";
+
 export type BusinessInfo = {
   name: string;
   tagline: string;
@@ -36,15 +41,15 @@ export type BusinessInfo = {
 export const business: BusinessInfo = {
   name: "Brinda Caterers",
   tagline: "Authentic flavours. Timeless traditions.",
-  phone: env["VITE_BUSINESS_PHONE"] ?? "+91 735966568",
-  whatsapp: env["VITE_WHATSAPP_NUMBER"] ?? "91735966568",
+  phone: env["VITE_BUSINESS_PHONE"] ?? "+91 7395 966 568",
+  whatsapp: env["VITE_WHATSAPP_NUMBER"] ?? "+91 7395 966 568",
   email: env["VITE_BUSINESS_EMAIL"] ?? "brindacaterers@gmail.com",
   addressLines: (env["VITE_BUSINESS_ADDRESS"] ?? "No 9/82 Arani x road, Arani road | Near Muncipality water tank | Cheyyar - 604407")
     .split("|")
     .map((line) => line.trim())
     .filter(Boolean),
-  googleMapsUrl: env["VITE_GOOGLE_MAPS_URL"] ?? "",
-  googleMapsEmbedUrl: env["VITE_GOOGLE_MAPS_EMBED_URL"] ?? "",
+  googleMapsUrl: env["VITE_GOOGLE_MAPS_URL"] ?? "https://maps.app.goo.gl/9GqF1qVwZtGfL2uC8",
+  googleMapsEmbedUrl: env["VITE_GOOGLE_MAPS_EMBED_URL"] ?? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3892.7624703661827!2d79.53797190979454!3d12.66357318757257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52d7634ef07845%3A0x17940202e31aec01!2sBrinda%20Caterers!5e0!3m2!1sen!2sin!4v1788862457568!5m2!1sen!2sin",
   businessHours: env["VITE_BUSINESS_HOURS"] ?? "Open 24 Hours",
   instagram: env["VITE_INSTAGRAM_URL"] ?? "",
   facebook: env["VITE_FACEBOOK_URL"] ?? "",
@@ -62,22 +67,22 @@ export const hero = {
 export const cateringHighlights = [
   {
     title: "Weddings",
-    image: "/Highlightswedding.png",
+    image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Highlightswedding.png?alt=media",
     description: "Traditional feasts scaled for your celebration.",
   },
   {
     title: "Family Celebrations",
-    image: "/Highlightsfamily.png",
+    image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Highlightsfamily.png?alt=media",
     description: "Intimate catering for milestones and gatherings.",
   },
   {
     title: "Corporate Events",
-    image: "/highlightscorporate.png",
+    image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/highlightscorporate.png?alt=media",
     description: "Professional service for meetings and functions.",
   },
   {
     title: "Special Occasions",
-    image: "/highlightscustom.png",
+    image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/highlightscustom.png?alt=media",
     description: "Customised menus for unique occasions.",
   },
 ];
@@ -85,19 +90,19 @@ export const cateringHighlights = [
 export const foodHighlights = [
   {
     name: "Traditional Vegetarian Feast",
-    image: "/src/assets/hero-south-indian.jpg",
+    image: heroSouthIndian,
   },
   {
     name: "Chicken, Mutton & Beef",
-    image: "/src/assets/function-south-indian.jpg",
+    image: functionSouthIndian,
   },
   {
     name: "Premium Seafood Curries",
-    image: "/src/assets/wedding-south-indian.jpg",
+    image: weddingSouthIndian,
   },
   {
     name: "Snacks & Sweets",
-    image: "/src/assets/hero-south-indian.jpg",
+    image: dessertsImage,
   },
 ];
 

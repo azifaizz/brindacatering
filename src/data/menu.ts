@@ -71,14 +71,14 @@ export const menuCategories: MenuCategory[] = [
 
 export const menuItems: MenuItem[] = [
   // BREAKFAST
-  { id: "bf-1", category: "breakfast", name: "Idli", description: "Soft, steamed rice-lentil cakes.", image: "/idly.png", tags: ["Vegetarian", "Popular"] },
-  { id: "bf-2", category: "breakfast", name: "Dosa", description: "Classic crispy fermented crepe.", image: "/dosa.png", tags: ["Vegetarian"] },
-  { id: "bf-3", category: "breakfast", name: "Masala Dosa", description: "Crispy dosa with spiced potato filling.", image: "/masaldosa.png", tags: ["Vegetarian", "Signature"] },
-  { id: "bf-4", category: "breakfast", name: "Medu Vada", description: "Crispy urad-dal fritter.", image: "/meduvada.png", tags: ["Vegetarian", "Popular"] },
-  { id: "bf-5", category: "breakfast", name: "Ven Pongal", description: "Rice and moong dal cooked with pepper, cumin & ghee.", image: "/venpongal.png", tags: ["Vegetarian"] },
-  { id: "bf-6", category: "breakfast", name: "Uthappam", description: "Thick, soft dosa topped with vegetables.", image: "/uthappam.png", tags: ["Vegetarian"] },
-  { id: "bf-7", category: "breakfast", name: "Paniyaram", description: "Small fermented rice-lentil cakes, crispy outside.", image: "/Paniyaram.png", tags: ["Vegetarian"] },
-  { id: "bf-9", category: "breakfast", name: "Poori Masala", description: "Deep-fried wheat bread served with potato curry.", image: "/poorimasala.png", tags: ["Vegetarian", "Popular"] },
+  { id: "bf-1", category: "breakfast", name: "Idli", description: "Soft, steamed rice-lentil cakes.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/idly.png?alt=media", tags: ["Vegetarian", "Popular"] },
+  { id: "bf-2", category: "breakfast", name: "Dosa", description: "Classic crispy fermented crepe.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/dosa.png?alt=media", tags: ["Vegetarian"] },
+  { id: "bf-3", category: "breakfast", name: "Masala Dosa", description: "Crispy dosa with spiced potato filling.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/masaldosa.png?alt=media", tags: ["Vegetarian", "Signature"] },
+  { id: "bf-4", category: "breakfast", name: "Medu Vada", description: "Crispy urad-dal fritter.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/meduvada.png?alt=media", tags: ["Vegetarian", "Popular"] },
+  { id: "bf-5", category: "breakfast", name: "Ven Pongal", description: "Rice and moong dal cooked with pepper, cumin & ghee.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/venpongal.png?alt=media", tags: ["Vegetarian"] },
+  { id: "bf-6", category: "breakfast", name: "Uthappam", description: "Thick, soft dosa topped with vegetables.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/uthappam.png?alt=media", tags: ["Vegetarian"] },
+  { id: "bf-7", category: "breakfast", name: "Paniyaram", description: "Small fermented rice-lentil cakes, crispy outside.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Paniyaram.png?alt=media", tags: ["Vegetarian"] },
+  { id: "bf-9", category: "breakfast", name: "Poori Masala", description: "Deep-fried wheat bread served with potato curry.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/poorimasala.png?alt=media", tags: ["Vegetarian", "Popular"] },
 
   // TRADITIONAL LUNCH
   { id: "lun-1", category: "lunch", name: "Sambar", description: "Classic lentil and vegetable stew.", image: feastImage, tags: ["Vegetarian", "Signature"] },

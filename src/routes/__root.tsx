@@ -4,15 +4,13 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import appCss from "../styles.css?url";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
+import { CallButton } from "@/components/site/CallButton";
 import { business } from "@/data/business";
 
 function NotFoundComponent() {
@@ -75,95 +73,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Brinda Caterers" },
-      {
-        name: "description",
-        content:
-          "Authentic South Indian vegetarian and non-vegetarian catering for weddings, family functions and celebrations.",
-      },
-      { property: "og:site_name", content: "Brinda Caterers" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#0b2118" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&display=swap",
-      },
-    ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "Organization",
-              name: business.name,
-              description:
-                "Authentic South Indian vegetarian and non-vegetarian catering for weddings, family functions and celebrations.",
-              ...(business.siteUrl ? { url: business.siteUrl } : {}),
-              ...(business.phone ? { telephone: business.phone } : {}),
-              ...(business.email ? { email: business.email } : {}),
-              ...(business.instagram || business.facebook
-                ? {
-                    sameAs: [business.instagram, business.facebook].filter(Boolean),
-                  }
-                : {}),
-            },
-            {
-              "@type": "WebSite",
-              name: business.name,
-              ...(business.siteUrl ? { url: business.siteUrl } : {}),
-            },
-          ],
-        }),
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: ReactNode }) {
-  useEffect(() => {
-    if (!window.location.hash.includes("figmacapture")) return;
-
-    const script = document.createElement("script");
-    script.src = "https://mcp.figma.com/mcp/html-to-design/capture.js";
-    script.async = true;
-    document.head.appendChild(script);
-
-    return () => script.remove();
-  }, []);
-
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -178,11 +91,11 @@ function RootComponent() {
       </a>
       <Navbar />
       <main id="main">
-        {/* Required: nested routes render here. */}
         <Outlet />
       </main>
       <Footer />
       <WhatsAppButton />
+      <CallButton />
     </QueryClientProvider>
   );
 }
