@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Update the host below to your production domain after deployment,
+# then submit the sitemap in Google Search Console.
+Sitemap: /sitemap.xml
