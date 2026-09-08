@@ -10,7 +10,6 @@ import { useEffect, type ReactNode } from "react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
-import { CallButton } from "@/components/site/CallButton";
 import { business } from "@/data/business";
 
 function NotFoundComponent() {
@@ -95,7 +94,6 @@ function RootComponent() {
       </main>
       <Footer />
       <WhatsAppButton />
-      <CallButton />
     </QueryClientProvider>
   );
 }
