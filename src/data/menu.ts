@@ -103,17 +103,17 @@ export const menuItems: MenuItem[] = [
   { id: "lun-10", category: "lunch", name: "Vazhakkai Varuval", description: "Crispy raw banana fry.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/VazhakkaiVaruval.png?alt=media", tags: ["Vegetarian"] },
 
   // NON-VEG
-  { id: "nv-1", category: "non-veg", name: "Chicken Chettinad", description: "Intensely spiced Chettinad-style curry.", image: nonVegImage, tags: ["Non-Vegetarian", "Chef's Special"] },
-  { id: "nv-2", category: "non-veg", name: "Nattu Kozhi Kuzhambu", description: "Country chicken curry prepared with traditional spices.", image: nonVegImage, tags: ["Non-Vegetarian", "Signature"] },
-  { id: "nv-3", category: "non-veg", name: "Chicken 65", description: "Crispy, spicy deep-fried chicken starter.", image: nonVegImage, tags: ["Non-Vegetarian", "Popular"] },
-  { id: "nv-4", category: "non-veg", name: "Mutton Chukka", description: "Dry roasted tender mutton with pepper and spices.", image: nonVegImage, tags: ["Non-Vegetarian", "Signature"] },
-  { id: "nv-5", category: "non-veg", name: "Mutton Kuzhambu", description: "Traditional Tamil-style rich mutton curry.", image: nonVegImage, tags: ["Non-Vegetarian"] },
-  { id: "nv-6", category: "non-veg", name: "Mutton Biryani", description: "Seeraga samba rice cooked with tender mutton.", image: nonVegImage, tags: ["Non-Vegetarian", "Popular"] },
-  { id: "nv-7", category: "non-veg", name: "Ambur Biryani", description: "Distinctive biryani style from Ambur.", image: nonVegImage, tags: ["Non-Vegetarian"] },
-  { id: "nv-8", category: "non-veg", name: "Dindigul Biryani", description: "Famous seeraga samba biryani from Dindigul.", image: nonVegImage, tags: ["Non-Vegetarian"] },
-  { id: "nv-9", category: "non-veg", name: "Fish Kuzhambu", description: "Tangy and spicy South Indian fish curry.", image: nonVegImage, tags: ["Non-Vegetarian"] },
-  { id: "nv-10", category: "non-veg", name: "Fish Fry", description: "Crispy, spice-marinated shallow-fried fish.", image: nonVegImage, tags: ["Non-Vegetarian", "Popular"] },
-  { id: "nv-11", category: "non-veg", name: "Prawn Masala", description: "Succulent prawns cooked in a thick, spicy gravy.", image: nonVegImage, tags: ["Non-Vegetarian", "Chef's Special"] },
+  { id: "nv-1", category: "non-veg", name: "Chicken Chettinad", description: "Intensely spiced Chettinad-style curry.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Chicken%20Chettinad.png?alt=media", tags: ["Non-Vegetarian", "Chef's Special"] },
+  { id: "nv-2", category: "non-veg", name: "Nattu Kozhi Kuzhambu", description: "Country chicken curry prepared with traditional spices.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Nattu%20Kozhi%20Kuzhambu.png?alt=media", tags: ["Non-Vegetarian", "Signature"] },
+  { id: "nv-3", category: "non-veg", name: "Chicken 65", description: "Crispy, spicy deep-fried chicken starter.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Chicken%2065.png?alt=media", tags: ["Non-Vegetarian", "Popular"] },
+  { id: "nv-4", category: "non-veg", name: "Mutton Chukka", description: "Dry roasted tender mutton with pepper and spices.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Mutton%20Chukka.png?alt=media", tags: ["Non-Vegetarian", "Signature"] },
+  { id: "nv-5", category: "non-veg", name: "Mutton Kuzhambu", description: "Traditional Tamil-style rich mutton curry.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Mutton%20Kuzhambu.png?alt=media", tags: ["Non-Vegetarian"] },
+  { id: "nv-6", category: "non-veg", name: "Mutton Biryani", description: "Seeraga samba rice cooked with tender mutton.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Mutton%20Biryani.png?alt=media", tags: ["Non-Vegetarian", "Popular"] },
+  { id: "nv-7", category: "non-veg", name: "Ambur Biryani", description: "Distinctive biryani style from Ambur.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Ambur%20Biryani.png?alt=media", tags: ["Non-Vegetarian"] },
+  { id: "nv-8", category: "non-veg", name: "Dindigul Biryani", description: "Famous seeraga samba biryani from Dindigul.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Dindigul%20Biryani.png?alt=media", tags: ["Non-Vegetarian"] },
+  { id: "nv-9", category: "non-veg", name: "Fish Kuzhambu", description: "Tangy and spicy South Indian fish curry.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Fish%20Kuzhambu.png?alt=media", tags: ["Non-Vegetarian"] },
+  { id: "nv-10", category: "non-veg", name: "Fish Fry", description: "Crispy, spice-marinated shallow-fried fish.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Fish%20Fry.png?alt=media", tags: ["Non-Vegetarian", "Popular"] },
+  { id: "nv-11", category: "non-veg", name: "Prawn Masala", description: "Succulent prawns cooked in a thick, spicy gravy.", image: "https://firebasestorage.googleapis.com/v0/b/brindhacaterings.firebasestorage.app/o/Prawn%20Masala.png?alt=media", tags: ["Non-Vegetarian", "Chef's Special"] },
 
   // DINNER
   { id: "din-1", category: "dinner", name: "Parotta", description: "Layered, flaky flatbread served with salna.", image: functionImage, tags: ["Vegetarian", "Popular"] },
