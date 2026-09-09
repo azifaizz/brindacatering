@@ -104,7 +104,7 @@ function Home() {
                     decoding="async"
                     className="h-full w-full object-cover transition-transform duration-[2000ms] group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-70" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent opacity-100 transition-opacity duration-500 group-hover:opacity-80" />
                 </div>
                 <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 transition-transform duration-500 group-hover:-translate-y-2">
                   <h3 className="font-display text-2xl leading-tight text-primary-foreground">
@@ -166,7 +166,7 @@ function Home() {
               <Reveal 
                 key={exp.step}
                 delay={index * 100}
-                className="group flex flex-col sm:flex-row items-start gap-6 sm:gap-16 border-t border-border/20 py-12 transition-colors hover:border-gold/40"
+                className="group flex flex-col sm:flex-row items-start gap-6 sm:gap-8 border-t border-border/20 py-12 transition-colors hover:border-gold/40"
               >
                 <span className="font-display text-5xl sm:text-7xl text-primary-foreground/50 transition-colors group-hover:text-accent shrink-0">
                   {exp.step}
