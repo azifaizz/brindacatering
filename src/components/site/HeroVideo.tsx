@@ -62,7 +62,7 @@ export function HeroVideo() {
 
       <div className="relative mx-auto w-full max-w-[1600px] px-5 pt-32 pb-20 sm:px-8 sm:pb-24 lg:px-12">
         <div className="max-w-3xl">
-          <h1 className="hero-in text-[clamp(4rem,10vw,8rem)] font-extrabold uppercase leading-[0.85] tracking-tighter text-ink-foreground">
+          <h1 className="hero-in text-6xl md:text-7xl lg:text-7xl font-extrabold uppercase leading-[0.85] tracking-tighter text-ink-foreground">
             {hero.eyebrow}
           </h1>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">

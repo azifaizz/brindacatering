@@ -65,7 +65,7 @@ function Home() {
             </Reveal>
             <Reveal delay={100} className="flex flex-col justify-center">
               <p className="eyebrow text-primary">Our Story</p>
-              <h2 className="mt-4 font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] text-foreground">
+              <h2 className="mt-4 font-display text-4xl md:text-5xl lg:text-7xl leading-[1.1] text-foreground">
                 Tradition in every detail.
               </h2>
               <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">

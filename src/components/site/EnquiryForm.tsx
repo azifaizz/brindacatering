@@ -18,7 +18,7 @@ type Status = { state: "idle" } | { state: "success" } | { state: "error"; messa
 const fieldClass =
   "w-full rounded-sm border border-input bg-card px-4 py-3 text-sm text-foreground transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none";
 
-const labelClass = "block text-[0.7rem] uppercase tracking-[0.16em] text-muted-foreground";
+const labelClass = "block text-xs uppercase tracking-[0.16em] text-muted-foreground";
 
 export function EnquiryForm({ defaultService }: { defaultService?: string }) {
   const [status, setStatus] = useState<Status>({ state: "idle" });

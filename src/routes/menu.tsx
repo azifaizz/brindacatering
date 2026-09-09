@@ -102,7 +102,7 @@ function MenuPage() {
                                 {item.tags.map((tag) => (
                                   <span
                                     key={tag}
-                                    className="rounded-sm bg-secondary/80 px-2.5 py-1 text-[0.65rem] uppercase tracking-wider text-secondary-foreground"
+                                    className="rounded-sm bg-secondary/80 px-2.5 py-1 text-xs uppercase tracking-wider text-secondary-foreground"
                                   >
                                     {tag}
                                   </span>

@@ -25,7 +25,7 @@ export function PageHero({ eyebrow, title, intro, image, alt }: Props) {
       />
       <div className="relative mx-auto w-full max-w-[1600px] px-5 pb-20 sm:px-8 lg:px-12 lg:pb-24">
         <p className="eyebrow text-gold">{eyebrow}</p>
-        <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] text-ink-foreground">
+        <h1 className="mt-6 max-w-4xl font-display text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-ink-foreground">
           {title}
         </h1>
         {intro ? (

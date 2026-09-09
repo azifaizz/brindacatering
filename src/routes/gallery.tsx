@@ -61,7 +61,7 @@ function GalleryPage() {
                 onClick={() => setFilter(option)}
                 aria-pressed={filter === option}
                 className={cn(
-                  "rounded-sm border px-4 py-2.5 text-[0.7rem] uppercase tracking-[0.16em] transition-colors",
+                  "rounded-sm border px-4 py-2.5 text-xs uppercase tracking-[0.16em] transition-colors",
                   filter === option
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border text-foreground/70 hover:border-primary hover:text-primary",

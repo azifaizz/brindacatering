@@ -19,7 +19,7 @@ export function FinalCTA({
       <div className="mx-auto max-w-[1600px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
         <Reveal className="mx-auto max-w-3xl text-center">
           <p className="eyebrow text-gold">Ready to start?</p>
-          <h2 className="mt-6 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.03]">
+          <h2 className="mt-6 font-display text-4xl md:text-5xl lg:text-7xl leading-[1.03]">
             {title}
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink-foreground/70">

@@ -72,7 +72,7 @@ export function Navbar() {
         >
           <span className="block">Brinda</span>
           <span
-            className={cn("eyebrow block text-[0.55rem]", solid ? "text-primary" : "text-gold")}
+            className={cn("eyebrow block text-xs", solid ? "text-primary" : "text-gold")}
           >
             Catering Services
           </span>
@@ -86,7 +86,7 @@ export function Navbar() {
                 <Link
                   to={link.to}
                   className={cn(
-                    "relative text-[0.8rem] uppercase tracking-[0.14em] transition-colors",
+                    "relative text-sm uppercase tracking-[0.14em] transition-colors",
                     solid ? "text-foreground/75" : "text-ink-foreground/80",
                     "hover:text-primary",
                     solid ? "" : "hover:text-gold",
@@ -112,7 +112,7 @@ export function Navbar() {
             to="/contact"
             variant={solid ? "primary" : "gold"}
             withArrow={false}
-            className="hidden px-5 py-3 text-[0.7rem] sm:inline-flex"
+            className="hidden px-5 py-3 text-xs sm:inline-flex"
           >
             Get a Catering Quote
           </CTALink>
@@ -173,7 +173,7 @@ export function Navbar() {
               Get a Catering Quote
             </CTALink>
             {(business.instagram || business.facebook) && (
-              <div className="mt-auto flex gap-6 pt-10 text-[0.75rem] uppercase tracking-[0.16em] text-ink-foreground/70">
+              <div className="mt-auto flex gap-6 pt-10 text-xs uppercase tracking-[0.16em] text-ink-foreground/70">
                 {business.instagram ? (
                   <a href={business.instagram} rel="noopener noreferrer" target="_blank">
                     Instagram
