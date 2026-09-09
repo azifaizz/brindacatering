@@ -43,13 +43,7 @@ function MenuPage() {
 
       <section className="bg-background">
         <div className="mx-auto max-w-[1600px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
-          <SectionHeading
-            eyebrow="Food Catalogue"
-            title="The feast begins here"
-            intro="Prices are shared in your quotation rather than listed here, since quantities and selections vary by event."
-          />
-
-          <div className="mt-20 space-y-32">
+          <div className="space-y-32">
             {menuCategories.map((category) => {
               const items = itemsByCategory(category.id);
               return (
