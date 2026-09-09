@@ -19,26 +19,26 @@ export function Footer() {
   const mail = mailLink();
 
   return (
-    <footer className="bg-ink text-ink-foreground border-t border-ink-foreground/10">
+    <footer className="bg-ink text-primary-foreground border-t border-ink-foreground/10">
       <div className="mx-auto max-w-[1600px] px-5 py-20 sm:px-8 lg:px-12">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-14">
           <div>
             <p className="font-display text-3xl leading-tight">Brinda</p>
-            <p className="eyebrow mt-2 text-gold">Catering Services</p>
-            <p className="mt-6 max-w-xs text-sm leading-relaxed text-ink-foreground/65">
+            <p className="eyebrow mt-2 text-accent">Catering Services</p>
+            <p className="mt-6 max-w-xs text-sm leading-relaxed text-primary-foreground/50">
               Professional catering for weddings, celebrations, corporate events and special
               occasions.
             </p>
           </div>
 
           <nav aria-label="Footer">
-            <h2 className="eyebrow text-ink-foreground/50">Navigate</h2>
+            <h2 className="eyebrow text-primary-foreground/50">Navigate</h2>
             <ul className="mt-6 space-y-3 text-sm">
               {nav.map((item) => (
                 <li key={item.to}>
                   <Link
                     to={item.to}
-                    className="text-ink-foreground/80 transition-colors hover:text-gold"
+                    className="text-primary-foreground/50 transition-colors hover:text-accent"
                   >
                     {item.label}
                   </Link>
@@ -48,45 +48,45 @@ export function Footer() {
           </nav>
 
           <div>
-            <h2 className="eyebrow text-ink-foreground/50">Contact</h2>
-            <ul className="mt-6 space-y-4 text-sm text-ink-foreground/80">
+            <h2 className="eyebrow text-primary-foreground/50">Contact</h2>
+            <ul className="mt-6 space-y-4 text-sm text-primary-foreground/50">
               <li className="flex items-start gap-3">
-                <Phone aria-hidden="true" className="mt-0.5 h-4 w-4 text-gold" />
+                <Phone aria-hidden="true" className="mt-0.5 h-4 w-4 text-accent" />
                 {tel ? (
-                  <a href={tel} className="hover:text-gold">
+                  <a href={tel} className="hover:text-accent">
                     {business.phone}
                   </a>
                 ) : (
-                  <span className="text-ink-foreground/50">Phone number to be added</span>
+                  <span className="text-primary-foreground/50">Phone number to be added</span>
                 )}
               </li>
               <li className="flex items-start gap-3">
-                <MessageCircle aria-hidden="true" className="mt-0.5 h-4 w-4 text-gold" />
+                <MessageCircle aria-hidden="true" className="mt-0.5 h-4 w-4 text-accent" />
                 {wa ? (
                   <a
                     href={wa}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-gold"
+                    className="hover:text-accent"
                   >
                     {business.phone}
                   </a>
                 ) : (
-                  <span className="text-ink-foreground/50">WhatsApp number to be added</span>
+                  <span className="text-primary-foreground/50">WhatsApp number to be added</span>
                 )}
               </li>
               <li className="flex items-start gap-3">
-                <Mail aria-hidden="true" className="mt-0.5 h-4 w-4 text-gold" />
+                <Mail aria-hidden="true" className="mt-0.5 h-4 w-4 text-accent" />
                 {mail ? (
-                  <a href={mail} className="hover:text-gold">
+                  <a href={mail} className="hover:text-accent">
                     {business.email}
                   </a>
                 ) : (
-                  <span className="text-ink-foreground/50">Email to be added</span>
+                  <span className="text-primary-foreground/50">Email to be added</span>
                 )}
               </li>
               <li className="flex items-start gap-3">
-                <MapPin aria-hidden="true" className="mt-0.5 h-4 w-4 text-gold" />
+                <MapPin aria-hidden="true" className="mt-0.5 h-4 w-4 text-accent" />
                 {business.addressLines.length ? (
                   <span>
                     {business.addressLines.map((line) => (
@@ -96,14 +96,14 @@ export function Footer() {
                     ))}
                   </span>
                 ) : (
-                  <span className="text-ink-foreground/50">Address to be added</span>
+                  <span className="text-primary-foreground/50">Address to be added</span>
                 )}
               </li>
             </ul>
           </div>
 
           <div>
-            <h2 className="eyebrow text-ink-foreground/50">Plan your event</h2>
+            <h2 className="eyebrow text-primary-foreground/50">Plan your event</h2>
             <CTALink to="/contact" variant="gold" className="mt-6 w-max">
               Get a Quote
             </CTALink>
@@ -115,7 +115,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-ink-foreground/20 transition-colors hover:border-gold hover:text-gold"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-ink-foreground/20 transition-colors hover:border-gold hover:text-accent"
                   >
                     <Instagram className="h-4 w-4" aria-hidden="true" />
                   </a>
@@ -126,7 +126,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook"
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-ink-foreground/20 transition-colors hover:border-gold hover:text-gold"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-ink-foreground/20 transition-colors hover:border-gold hover:text-accent"
                   >
                     <Facebook className="h-4 w-4" aria-hidden="true" />
                   </a>
@@ -136,7 +136,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-ink-foreground/10 pt-8 text-xs text-ink-foreground/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-ink-foreground/10 pt-8 text-xs text-primary-foreground/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {business.name}. All rights reserved.
           </p>

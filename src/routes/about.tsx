@@ -82,7 +82,7 @@ function About() {
                 delay={index * 80}
                 className="group relative overflow-hidden rounded-2xl bg-background p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl border border-border/50"
               >
-                <span className="absolute right-6 top-4 font-display text-7xl text-primary/5 transition-colors duration-500 group-hover:text-gold/20 select-none">
+                <span className="absolute right-6 top-4 font-display text-7xl text-primary transition-colors duration-500 group-hover:text-accent select-none">
                   0{index + 1}
                 </span>
                 <div className="relative z-10">
@@ -126,7 +126,7 @@ function About() {
       </section>
 
       {/* 05 — Our Values */}
-      <section className="bg-ink text-ink-foreground">
+      <section className="bg-ink text-primary-foreground">
         <div className="mx-auto max-w-[1000px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32 text-center">
           <SectionHeading
             tone="inverse"
@@ -137,7 +137,7 @@ function About() {
           <ul className="mt-16 flex flex-wrap justify-center gap-4 sm:gap-6">
             {aboutPageData.ourValues.map((value, index) => (
               <Reveal as="li" key={value} delay={index * 100}>
-                <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-6 py-3 text-lg font-medium text-gold transition-colors hover:bg-gold/20">
+                <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-6 py-3 text-lg font-medium text-accent transition-colors hover:bg-gold/20">
                   <Check className="h-5 w-5" />
                   {value}
                 </span>

@@ -24,12 +24,12 @@ export function PageHero({ eyebrow, title, intro, image, alt }: Props) {
         className="absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_oklab,var(--ink)_92%,transparent),color-mix(in_oklab,var(--ink)_55%,transparent))]"
       />
       <div className="relative mx-auto w-full max-w-[1600px] px-5 pb-20 sm:px-8 lg:px-12 lg:pb-24">
-        <p className="eyebrow text-gold">{eyebrow}</p>
-        <h1 className="mt-6 max-w-4xl font-display text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-ink-foreground">
+        <p className="eyebrow text-accent">{eyebrow}</p>
+        <h1 className="mt-6 max-w-4xl font-display text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-primary-foreground">
           {title}
         </h1>
         {intro ? (
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-foreground/80 sm:text-lg lg:text-xl">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground/50 sm:text-lg lg:text-xl">
             {intro}
           </p>
         ) : null}

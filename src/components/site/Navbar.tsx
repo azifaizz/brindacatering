@@ -67,12 +67,12 @@ export function Navbar() {
           to="/"
           className={cn(
             "font-display text-lg leading-tight tracking-tight transition-colors sm:text-xl",
-            solid ? "text-foreground" : "text-ink-foreground",
+            solid ? "text-foreground" : "text-primary-foreground",
           )}
         >
           <span className="block">Brinda</span>
           <span
-            className={cn("eyebrow block text-xs", solid ? "text-primary" : "text-gold")}
+            className={cn("eyebrow block text-xs", solid ? "text-primary" : "text-accent")}
           >
             Catering Services
           </span>
@@ -87,9 +87,9 @@ export function Navbar() {
                   to={link.to}
                   className={cn(
                     "relative text-sm uppercase tracking-[0.14em] transition-colors",
-                    solid ? "text-foreground/75" : "text-ink-foreground/80",
+                    solid ? "text-muted-foreground" : "text-primary-foreground/50",
                     "hover:text-primary",
-                    solid ? "" : "hover:text-gold",
+                    solid ? "" : "hover:text-accent",
                   )}
                   aria-current={active ? "page" : undefined}
                 >
@@ -126,7 +126,7 @@ export function Navbar() {
               "inline-flex h-11 w-11 items-center justify-center rounded-sm border transition-colors lg:hidden",
               solid
                 ? "border-border text-foreground"
-                : "border-ink-foreground/30 text-ink-foreground",
+                : "border-ink-foreground/30 text-primary-foreground",
             )}
           >
             {open ? <Menu className="hidden" /> : null}
@@ -148,7 +148,7 @@ export function Navbar() {
             className="ml-auto flex h-full w-full max-w-md flex-col overflow-y-auto bg-ink px-6 py-8 shadow-2xl sm:px-8"
             onClick={(event) => event.stopPropagation()}
           >
-            <p className="eyebrow text-gold">Explore Brinda</p>
+            <p className="eyebrow text-accent">Explore Brinda</p>
             <ul className="mt-6 space-y-1">
               {links.map((link) => {
                 const active = link.to === "/" ? pathname === "/" : pathname.startsWith(link.to);
@@ -160,7 +160,7 @@ export function Navbar() {
                       aria-current={active ? "page" : undefined}
                       className={cn(
                         "block border-b border-ink-foreground/10 py-4 font-display text-3xl transition-colors",
-                        active ? "text-gold" : "text-ink-foreground hover:text-gold",
+                        active ? "text-accent" : "text-primary-foreground hover:text-accent",
                       )}
                     >
                       {link.label}
@@ -173,7 +173,7 @@ export function Navbar() {
               Get a Catering Quote
             </CTALink>
             {(business.instagram || business.facebook) && (
-              <div className="mt-auto flex gap-6 pt-10 text-xs uppercase tracking-[0.16em] text-ink-foreground/70">
+              <div className="mt-auto flex gap-6 pt-10 text-xs uppercase tracking-[0.16em] text-primary-foreground/50">
                 {business.instagram ? (
                   <a href={business.instagram} rel="noopener noreferrer" target="_blank">
                     Instagram

@@ -90,7 +90,7 @@ function Services() {
                           {service.suitableFor.map((item) => (
                             <li
                               key={item}
-                              className="rounded-sm border border-border px-3 py-1.5 text-xs tracking-wide text-foreground/80"
+                              className="rounded-sm border border-border px-3 py-1.5 text-xs tracking-wide text-muted-foreground"
                             >
                               {item}
                             </li>

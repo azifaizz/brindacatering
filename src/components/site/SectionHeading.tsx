@@ -25,14 +25,14 @@ export function SectionHeading({
   return (
     <Reveal className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)}>
       {eyebrow ? (
-        <p className={cn("eyebrow mb-5", tone === "inverse" ? "text-gold" : "text-primary")}>
+        <p className={cn("eyebrow mb-5", tone === "inverse" ? "text-accent" : "text-primary")}>
           {eyebrow}
         </p>
       ) : null}
       <Heading
         className={cn(
           "text-balance text-4xl leading-[1.05] sm:text-5xl lg:text-6xl",
-          tone === "inverse" ? "text-ink-foreground" : "text-foreground",
+          tone === "inverse" ? "text-primary-foreground" : "text-foreground",
         )}
       >
         {title}
@@ -42,7 +42,7 @@ export function SectionHeading({
           className={cn(
             "mt-6 max-w-2xl text-base leading-relaxed sm:text-lg",
             align === "center" && "mx-auto",
-            tone === "inverse" ? "text-ink-foreground/70" : "text-muted-foreground",
+            tone === "inverse" ? "text-primary-foreground/50" : "text-muted-foreground",
           )}
         >
           {intro}

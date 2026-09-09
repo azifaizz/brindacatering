@@ -58,8 +58,8 @@ function Home() {
             <Reveal>
               <div className="overflow-hidden rounded-2xl shadow-lg">
                 <div className="flex aspect-[4/3] w-full flex-col items-center justify-center bg-muted/50 transition-transform duration-[1200ms] hover:scale-105 border-2 border-dashed border-border/50">
-                  <span className="font-display text-2xl text-foreground/50">Master Photo / Logo Placeholder</span>
-                  <span className="mt-2 text-sm uppercase tracking-widest text-foreground/30">Upload Image Here</span>
+                  <span className="font-display text-2xl text-muted-foreground">Master Photo / Logo Placeholder</span>
+                  <span className="mt-2 text-sm uppercase tracking-widest text-muted-foreground">Upload Image Here</span>
                 </div>
               </div>
             </Reveal>
@@ -107,10 +107,10 @@ function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-70" />
                 </div>
                 <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 transition-transform duration-500 group-hover:-translate-y-2">
-                  <h3 className="font-display text-2xl leading-tight text-ink-foreground">
+                  <h3 className="font-display text-2xl leading-tight text-primary-foreground">
                     {highlight.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-foreground/80">
+                  <p className="mt-3 text-sm leading-relaxed text-primary-foreground/50">
                     {highlight.description}
                   </p>
                 </div>
@@ -152,7 +152,7 @@ function Home() {
       </section>
 
       {/* 05 — Catering Experience */}
-      <section className="bg-ink text-ink-foreground">
+      <section className="bg-ink text-primary-foreground">
         <div className="mx-auto max-w-[1600px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
           <SectionHeading
             align="center"
@@ -168,12 +168,12 @@ function Home() {
                 delay={index * 100}
                 className="group flex flex-col sm:flex-row items-start gap-6 sm:gap-16 border-t border-border/20 py-12 transition-colors hover:border-gold/40"
               >
-                <span className="font-display text-5xl sm:text-7xl text-ink-foreground/20 transition-colors group-hover:text-gold shrink-0">
+                <span className="font-display text-5xl sm:text-7xl text-primary-foreground/50 transition-colors group-hover:text-accent shrink-0">
                   {exp.step}
                 </span>
                 <div className="pt-2">
-                  <h3 className="font-display text-3xl sm:text-4xl tracking-tight text-ink-foreground">{exp.title}</h3>
-                  <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-ink-foreground/70">
+                  <h3 className="font-display text-3xl sm:text-4xl tracking-tight text-primary-foreground">{exp.title}</h3>
+                  <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-primary-foreground/50">
                     {exp.description}
                   </p>
                 </div>

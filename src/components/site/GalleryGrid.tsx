@@ -76,8 +76,8 @@ export function GalleryGrid({ images, className }: Props) {
                 className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/45"
               />
               <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-5 text-left opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                <span className="eyebrow block text-gold">{image.category}</span>
-                <span className="mt-1 block font-display text-xl text-ink-foreground">
+                <span className="eyebrow block text-accent">{image.category}</span>
+                <span className="mt-1 block font-display text-xl text-primary-foreground">
                   {image.title}
                 </span>
               </span>
@@ -104,14 +104,14 @@ export function GalleryGrid({ images, className }: Props) {
             else prev();
           }}
         >
-          <div className="flex items-center justify-between text-ink-foreground">
+          <div className="flex items-center justify-between text-primary-foreground">
             <p className="font-display text-xl">{active.title}</p>
             <button
               ref={closeRef}
               type="button"
               onClick={close}
               aria-label="Close gallery"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-ink-foreground/25 transition-colors hover:border-gold hover:text-gold"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-ink-foreground/25 transition-colors hover:border-gold hover:text-accent"
             >
               <X className="h-5 w-5" aria-hidden="true" />
             </button>
@@ -121,7 +121,7 @@ export function GalleryGrid({ images, className }: Props) {
               type="button"
               onClick={prev}
               aria-label="Previous image"
-              className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-sm border border-ink-foreground/25 text-ink-foreground transition-colors hover:border-gold hover:text-gold sm:inline-flex"
+              className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-sm border border-ink-foreground/25 text-primary-foreground transition-colors hover:border-gold hover:text-accent sm:inline-flex"
             >
               <ChevronLeft className="h-5 w-5" aria-hidden="true" />
             </button>
@@ -134,12 +134,12 @@ export function GalleryGrid({ images, className }: Props) {
               type="button"
               onClick={next}
               aria-label="Next image"
-              className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-sm border border-ink-foreground/25 text-ink-foreground transition-colors hover:border-gold hover:text-gold sm:inline-flex"
+              className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-sm border border-ink-foreground/25 text-primary-foreground transition-colors hover:border-gold hover:text-accent sm:inline-flex"
             >
               <ChevronRight className="h-5 w-5" aria-hidden="true" />
             </button>
           </div>
-          <div className="flex items-center justify-center gap-6 text-ink-foreground sm:hidden">
+          <div className="flex items-center justify-center gap-6 text-primary-foreground sm:hidden">
             <button type="button" onClick={prev} aria-label="Previous image" className="h-11 px-4">
               <ChevronLeft className="h-5 w-5" aria-hidden="true" />
             </button>

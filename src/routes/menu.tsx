@@ -91,7 +91,7 @@ function MenuPage() {
                           ) : null}
                           <div className="flex flex-1 flex-col p-6">
                             <div className="flex items-start justify-between gap-3">
-                              <h3 className="font-display text-xl leading-tight text-card-foreground">{item.name}</h3>
+                              <h3 className="font-display text-xl leading-tight text-foreground">{item.name}</h3>
                               {item.price ? (
                                 <span className="shrink-0 text-sm font-medium text-primary">{item.price}</span>
                               ) : null}

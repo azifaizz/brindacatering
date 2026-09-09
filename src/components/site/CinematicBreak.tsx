@@ -51,7 +51,7 @@ export function CinematicBreak({ image, alt, statement }: Props) {
         className="absolute inset-0 bg-[color-mix(in_oklab,var(--ink)_62%,transparent)]"
       />
       <div className="relative mx-auto flex min-h-[60svh] max-w-[1600px] items-center px-5 py-24 sm:px-8 lg:px-12">
-        <p className="max-w-3xl font-display text-4xl md:text-5xl lg:text-6xl leading-[1.08] text-ink-foreground">
+        <p className="max-w-3xl font-display text-4xl md:text-5xl lg:text-6xl leading-[1.08] text-primary-foreground">
           {statement}
         </p>
       </div>

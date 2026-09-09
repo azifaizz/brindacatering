@@ -14,13 +14,13 @@ import { business } from "@/data/business";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-ink px-4 text-ink-foreground">
+    <div className="flex min-h-screen items-center justify-center bg-ink px-4 text-primary-foreground">
       <div className="max-w-md text-center">
-        <p className="eyebrow text-gold">404</p>
+        <p className="eyebrow text-accent">404</p>
         <h1 className="mt-6 font-display text-5xl leading-tight">
           Looks like this plate is empty.
         </h1>
-        <p className="mt-4 text-sm text-ink-foreground/70">
+        <p className="mt-4 text-sm text-primary-foreground/50">
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-8">

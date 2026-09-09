@@ -203,7 +203,7 @@ function ContactDetail({
     <div className="border-b border-border/70 px-0 py-8 sm:border-r sm:px-7 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0">
       <div className="flex items-center gap-3 text-primary">
         {icon}
-        <h3 className="eyebrow text-muted-foreground/80">{title}</h3>
+        <h3 className="eyebrow text-muted-foreground">{title}</h3>
       </div>
       <div className="mt-5 text-sm text-foreground">{children}</div>
     </div>
@@ -211,5 +211,5 @@ function ContactDetail({
 }
 
 function Placeholder({ text }: { text: string }) {
-  return <span className="text-sm text-muted-foreground/70">{text}</span>;
+  return <span className="text-sm text-muted-foreground">{text}</span>;
 }

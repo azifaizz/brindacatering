@@ -16,7 +16,7 @@ import { whatsAppLink } from "@/lib/whatsapp";
 type Status = { state: "idle" } | { state: "success" } | { state: "error"; message: string };
 
 const fieldClass =
-  "w-full rounded-sm border border-input bg-card px-4 py-3 text-sm text-foreground transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none";
+  "w-full rounded-sm border border-input bg-card px-4 py-3 text-sm text-foreground transition-colors placeholder:text-muted-foreground focus:border-primary focus:outline-none";
 
 const labelClass = "block text-xs uppercase tracking-[0.16em] text-muted-foreground";
 

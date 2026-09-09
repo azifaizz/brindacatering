@@ -13,7 +13,7 @@ const variants: Record<Variant, string> = {
     "bg-primary text-primary-foreground shadow-sm ring-1 ring-transparent hover:bg-ink hover:ring-gold/40 hover:shadow-[0_15px_40px_-15px_color-mix(in_oklab,var(--primary)_80%,transparent)] hover:-translate-y-1",
   outline: "rounded-full border border-current/30 text-current hover:bg-current/10 hover:-translate-y-0.5",
   ghost: "rounded-full text-current hover:opacity-80",
-  gold: "bg-gold text-ink font-semibold shadow-[0_0_20px_color-mix(in_oklab,var(--gold)_30%,transparent)] ring-1 ring-gold/50 hover:bg-gold/90 hover:-translate-y-1 hover:shadow-[0_10px_30px_color-mix(in_oklab,var(--gold)_50%,transparent)] hover:ring-gold",
+  gold: "bg-gold text-primary font-semibold shadow-[0_0_20px_color-mix(in_oklab,var(--gold)_30%,transparent)] ring-1 ring-gold/50 hover:bg-gold/90 hover:-translate-y-1 hover:shadow-[0_10px_30px_color-mix(in_oklab,var(--gold)_50%,transparent)] hover:ring-gold",
 };
 
 type CommonProps = {
