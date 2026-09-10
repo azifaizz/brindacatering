@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -79,6 +80,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const routerState = useRouterState();
+  
+  const isAdminRoute = routerState.location.pathname.startsWith('/admin') || routerState.location.pathname === '/login';
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -88,12 +92,12 @@ function RootComponent() {
       >
         Skip to content
       </a>
-      <Navbar />
+      {!isAdminRoute && <Navbar />}
       <main id="main">
         <Outlet />
       </main>
-      <Footer />
-      <WhatsAppButton />
+      {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <WhatsAppButton />}
     </QueryClientProvider>
   );
 }
