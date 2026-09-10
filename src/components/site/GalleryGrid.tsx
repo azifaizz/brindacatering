@@ -64,13 +64,19 @@ export function GalleryGrid({ images, className }: Props) {
               className="group relative block w-full overflow-hidden rounded-sm bg-muted"
               aria-label={`Open image: ${image.title}`}
             >
-              <img
-                src={image.image}
-                alt={image.alt}
-                loading="lazy"
-                decoding="async"
-                className="h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-              />
+              {image.image ? (
+                <img
+                  src={image.image}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+              ) : (
+                <div className="flex h-48 w-full items-center justify-center bg-muted/30 border-b border-border/50">
+                  <span className="text-sm font-medium text-muted-foreground/60">No Image Available</span>
+                </div>
+              )}
               <span
                 aria-hidden="true"
                 className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/45"

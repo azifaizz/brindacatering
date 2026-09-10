@@ -358,12 +358,18 @@ function AdminGallery() {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {categoryImages.map(img => (
                       <div key={img.id} className="group relative bg-card border border-border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                        <div className="aspect-[4/3] relative">
-                          <img 
-                            src={img.image} 
-                            alt={img.alt} 
-                            className="w-full h-full object-cover"
-                          />
+                        <div className="aspect-[4/3] relative overflow-hidden bg-muted">
+                          {img.image ? (
+                            <img 
+                              src={img.image} 
+                              alt={img.alt} 
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-muted/30 border border-border/50">
+                              <span className="text-sm font-medium text-muted-foreground/60">No Image Available</span>
+                            </div>
+                          )}
                           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
                             <Button variant="destructive" size="sm" onClick={() => handleDeleteImage(img)}>
                               <Trash2 className="w-4 h-4 mr-2" /> Delete
