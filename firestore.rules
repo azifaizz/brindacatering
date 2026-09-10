@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Match any document in the entire database
+    match /{document=**} {
+      // ANYONE can read the menu and gallery (public site)
+      allow read: if true;
+      
+      // ONLY logged-in admins can add, edit, or delete items
+      allow write: if request.auth != null;
+    }
+  }
+}
