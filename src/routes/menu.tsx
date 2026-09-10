@@ -3,7 +3,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { FinalCTA } from "@/components/site/FinalCTA";
-import { itemsByCategory, menuCategories as defaultCategories, MenuItem, MenuCategory } from "@/data/menu";
+import { itemsByCategory, MenuItem, MenuCategory } from "@/data/menu";
 import feastImage from "@/assets/premium-feast.jpg";
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
@@ -35,13 +35,13 @@ export const Route = createFileRoute("/menu")({
 
 function MenuPage() {
   const [firebaseItems, setFirebaseItems] = useState<MenuItem[] | null>(null);
-  const [firebaseCategories, setFirebaseCategories] = useState<MenuCategory[]>(defaultCategories);
+  const [firebaseCategories, setFirebaseCategories] = useState<MenuCategory[]>([]);
 
   useEffect(() => {
     if (!db) return;
     const qItems = query(collection(db, 'menuItems'), orderBy('order'));
     const unsubscribeItems = onSnapshot(qItems, (snapshot) => {
-      const data = snapshot.docs.map(doc => doc.data() as MenuItem);
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as MenuItem);
       setFirebaseItems(data);
     }, (error) => {
       console.error("Error fetching menu items:", error);
@@ -49,16 +49,8 @@ function MenuPage() {
 
     const qCategories = query(collection(db, 'menuCategories'), orderBy('order'));
     const unsubscribeCategories = onSnapshot(qCategories, (snapshot) => {
-      if (!snapshot.empty) {
-        const dbCategories = snapshot.docs.map(doc => doc.data() as MenuCategory);
-        
-        // Gracefully merge any missing default categories so the UI never breaks
-        const existingIds = new Set(dbCategories.map(c => c.id));
-        const missingDefaults = defaultCategories.filter(c => !existingIds.has(c.id));
-        const combined = [...dbCategories, ...missingDefaults].sort((a, b) => (a.order || 0) - (b.order || 0));
-        
-        setFirebaseCategories(combined);
-      }
+      const dbCategories = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as MenuCategory);
+      setFirebaseCategories(dbCategories);
     }, (error) => {
       console.error("Error fetching menu categories:", error);
     });

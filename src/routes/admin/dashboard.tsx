@@ -18,7 +18,7 @@ export const Route = createFileRoute('/admin/dashboard')({
 
 function AdminDashboard() {
   const [items, setItems] = useState<MenuItem[]>([]);
-  const [categories, setCategories] = useState<MenuCategory[]>(defaultCategories);
+  const [categories, setCategories] = useState<MenuCategory[]>([]);
   const [loading, setLoading] = useState(true);
   
   // Item Dialog State
@@ -43,49 +43,16 @@ function AdminDashboard() {
     // Fetch Items
     const qItems = query(collection(db, 'menuItems'), orderBy('order'));
     const unsubscribeItems = onSnapshot(qItems, (snapshot) => {
-      const data = snapshot.docs.map(doc => doc.data() as MenuItem);
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as MenuItem);
       setItems(data);
       setLoading(false);
     });
 
     // Fetch Categories
     const qCategories = query(collection(db, 'menuCategories'), orderBy('order'));
-    const unsubscribeCategories = onSnapshot(qCategories, async (snapshot) => {
-      // FORCE SYNC: Ensure all default categories exist and have an 'order' field
-      try {
-        const rawDocs = await import('firebase/firestore').then(m => m.getDocs(collection(db, 'menuCategories')));
-        const existingIds = new Set(rawDocs.docs.map(d => d.id));
-        
-        for (const cat of defaultCategories) {
-          if (!existingIds.has(cat.id)) {
-            console.log("Missing category, forcibly adding:", cat.id);
-            import('firebase/firestore').then(m => m.setDoc(m.doc(db!, 'menuCategories', cat.id), cat));
-          } else {
-            const existingData = rawDocs.docs.find(d => d.id === cat.id)?.data();
-            if (existingData && existingData.order === undefined) {
-              import('firebase/firestore').then(m => m.updateDoc(m.doc(db!, 'menuCategories', cat.id), { order: cat.order }));
-            }
-          }
-        }
-      } catch (e) {
-        console.error("Force sync failed", e);
-      }
-
-      if (snapshot.empty) {
-        console.log('Seeding default categories...');
-        for (const cat of defaultCategories) {
-          await setDoc(doc(db, 'menuCategories', cat.id), cat);
-        }
-      } else {
-        const dbCategories = snapshot.docs.map(doc => doc.data() as MenuCategory);
-        
-        // Gracefully merge any missing default categories so the UI never breaks
-        const existingIds = new Set(dbCategories.map(c => c.id));
-        const missingDefaults = defaultCategories.filter(c => !existingIds.has(c.id));
-        const combined = [...dbCategories, ...missingDefaults].sort((a, b) => (a.order || 0) - (b.order || 0));
-        
-        setCategories(combined);
-      }
+    const unsubscribeCategories = onSnapshot(qCategories, (snapshot) => {
+      const dbCategories = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as MenuCategory);
+      setCategories(dbCategories);
     });
 
     return () => {
@@ -380,9 +347,7 @@ function AdminDashboard() {
               </DialogContent>
             </Dialog>
 
-            <Button variant="outline" onClick={handleLogout} className="flex-1 sm:flex-none">
-              <LogOut className="w-4 h-4 mr-2" /> Logout
-            </Button>
+
           </div>
         </div>
 
