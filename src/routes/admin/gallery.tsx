@@ -17,7 +17,7 @@ export const Route = createFileRoute('/admin/gallery')({
 
 function AdminGallery() {
   const [images, setImages] = useState<GalleryImage[]>([]);
-  const [categories, setCategories] = useState<GalleryCategoryItem[]>(defaultGalleryCategories);
+  const [categories, setCategories] = useState<GalleryCategoryItem[]>([]);
   const [loading, setLoading] = useState(true);
   
   // Image Dialog State
@@ -40,55 +40,16 @@ function AdminGallery() {
 
     // Fetch Categories
     const qCategories = query(collection(db, 'galleryCategories'), orderBy('order'));
-    const unsubscribeCategories = onSnapshot(qCategories, async (snapshot) => {
-      // FORCE SYNC: Ensure all default categories exist and have an 'order' field
-      try {
-        const rawDocs = await import('firebase/firestore').then(m => m.getDocs(collection(db, 'galleryCategories')));
-        const existingIds = new Set(rawDocs.docs.map(d => d.id));
-        
-        for (const cat of defaultGalleryCategories) {
-          if (!existingIds.has(cat.id)) {
-            import('firebase/firestore').then(m => m.setDoc(m.doc(db!, 'galleryCategories', cat.id), cat));
-          } else {
-            const existingData = rawDocs.docs.find(d => d.id === cat.id)?.data();
-            if (existingData && existingData.order === undefined) {
-              import('firebase/firestore').then(m => m.updateDoc(m.doc(db!, 'galleryCategories', cat.id), { order: cat.order }));
-            }
-          }
-        }
-      } catch (e) {
-        console.error("Force sync failed", e);
-      }
-
-      if (snapshot.empty) {
-        for (const cat of defaultGalleryCategories) {
-          await setDoc(doc(db, 'galleryCategories', cat.id), cat);
-        }
-      } else {
-        const dbCategories = snapshot.docs.map(doc => doc.data() as GalleryCategoryItem);
-        const existingIds = new Set(dbCategories.map(c => c.id));
-        const missingDefaults = defaultGalleryCategories.filter(c => !existingIds.has(c.id));
-        const combined = [...dbCategories, ...missingDefaults].sort((a, b) => (a.order || 0) - (b.order || 0));
-        setCategories(combined);
-      }
+    const unsubscribeCategories = onSnapshot(qCategories, (snapshot) => {
+      const dbCategories = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as GalleryCategoryItem);
+      setCategories(dbCategories);
     });
 
     // Fetch Images
     const qImages = query(collection(db, 'galleryImages'), orderBy('order'));
-    const unsubscribeImages = onSnapshot(qImages, async (snapshot) => {
-      if (snapshot.empty) {
-        for (const img of defaultImages) {
-          await setDoc(doc(db, 'galleryImages', img.id), img);
-        }
-      } else {
-        const data = snapshot.docs.map(doc => doc.data() as GalleryImage);
-        
-        // merge static defaults just like categories so UI never breaks
-        const existingIds = new Set(data.map(i => i.id));
-        const missingDefaults = defaultImages.filter(i => !existingIds.has(i.id));
-        const combined = [...data, ...missingDefaults].sort((a, b) => (a.order || 0) - (b.order || 0));
-        setImages(combined);
-      }
+    const unsubscribeImages = onSnapshot(qImages, (snapshot) => {
+      const dbImages = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as GalleryImage);
+      setImages(dbImages);
       setLoading(false);
     });
 

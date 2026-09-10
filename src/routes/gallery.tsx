@@ -40,32 +40,22 @@ export const Route = createFileRoute("/gallery")({
 
 function GalleryPage() {
   const [filterId, setFilterId] = useState<string>("all");
-  const [categories, setCategories] = useState<GalleryCategoryItem[]>(defaultGalleryCategories);
-  const [images, setImages] = useState<GalleryImage[]>([...defaultImages].sort((a, b) => (a.order || 0) - (b.order || 0)));
+  const [categories, setCategories] = useState<GalleryCategoryItem[]>([]);
+  const [images, setImages] = useState<GalleryImage[]>([]);
 
   useEffect(() => {
     if (!db) return;
 
     const qCategories = query(collection(db, 'galleryCategories'), orderBy('order'));
     const unsubscribeCategories = onSnapshot(qCategories, (snapshot) => {
-      if (!snapshot.empty) {
-        const dbCategories = snapshot.docs.map(doc => doc.data() as GalleryCategoryItem);
-        const existingIds = new Set(dbCategories.map(c => c.id));
-        const missingDefaults = defaultGalleryCategories.filter(c => !existingIds.has(c.id));
-        const combined = [...dbCategories, ...missingDefaults].sort((a, b) => (a.order || 0) - (b.order || 0));
-        setCategories(combined);
-      }
+      const dbCategories = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as GalleryCategoryItem);
+      setCategories(dbCategories);
     });
 
     const qImages = query(collection(db, 'galleryImages'), orderBy('order'));
     const unsubscribeImages = onSnapshot(qImages, (snapshot) => {
-      if (!snapshot.empty) {
-        const dbImages = snapshot.docs.map(doc => doc.data() as GalleryImage);
-        const existingIds = new Set(dbImages.map(i => i.id));
-        const missingDefaults = defaultImages.filter(i => !existingIds.has(i.id));
-        const combined = [...dbImages, ...missingDefaults].sort((a, b) => (a.order || 0) - (b.order || 0));
-        setImages(combined);
-      }
+      const dbImages = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as GalleryImage);
+      setImages(dbImages);
     });
 
     return () => {
