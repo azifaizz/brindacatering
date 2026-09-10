@@ -13,7 +13,7 @@ import {
 } from "@/data/gallery";
 import kitchenImage from "@/assets/kitchen-south-indian.jpg";
 import { db } from "@/lib/firebase";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
 export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
@@ -46,22 +46,23 @@ function GalleryPage() {
   useEffect(() => {
     if (!db) return;
 
-    const qCategories = query(collection(db, 'galleryCategories'), orderBy('order'));
-    const unsubscribeCategories = onSnapshot(qCategories, (snapshot) => {
-      const dbCategories = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as GalleryCategoryItem);
-      setCategories(dbCategories);
-    });
+    const fetchData = async () => {
+      try {
+        const qCategories = query(collection(db, 'galleryCategories'), orderBy('order'));
+        const snapshotCategories = await getDocs(qCategories);
+        const dbCategories = snapshotCategories.docs.map(doc => ({ id: doc.id, ...doc.data() }) as GalleryCategoryItem);
+        setCategories(dbCategories);
 
-    const qImages = query(collection(db, 'galleryImages'), orderBy('order'));
-    const unsubscribeImages = onSnapshot(qImages, (snapshot) => {
-      const dbImages = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as GalleryImage);
-      setImages(dbImages);
-    });
-
-    return () => {
-      unsubscribeCategories();
-      unsubscribeImages();
+        const qImages = query(collection(db, 'galleryImages'), orderBy('order'));
+        const snapshotImages = await getDocs(qImages);
+        const dbImages = snapshotImages.docs.map(doc => ({ id: doc.id, ...doc.data() }) as GalleryImage);
+        setImages(dbImages);
+      } catch (error) {
+        console.error("Error fetching gallery data:", error);
+      }
     };
+
+    fetchData();
   }, []);
 
   const filters = [{ id: 'all', name: 'All' }, ...categories];

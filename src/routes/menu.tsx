@@ -7,7 +7,7 @@ import { itemsByCategory, MenuItem, MenuCategory } from "@/data/menu";
 import feastImage from "@/assets/premium-feast.jpg";
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
 export const Route = createFileRoute("/menu")({
   component: MenuPage,
@@ -39,26 +39,24 @@ function MenuPage() {
 
   useEffect(() => {
     if (!db) return;
-    const qItems = query(collection(db, 'menuItems'), orderBy('order'));
-    const unsubscribeItems = onSnapshot(qItems, (snapshot) => {
-      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as MenuItem);
-      setFirebaseItems(data);
-    }, (error) => {
-      console.error("Error fetching menu items:", error);
-    });
 
-    const qCategories = query(collection(db, 'menuCategories'), orderBy('order'));
-    const unsubscribeCategories = onSnapshot(qCategories, (snapshot) => {
-      const dbCategories = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as MenuCategory);
-      setFirebaseCategories(dbCategories);
-    }, (error) => {
-      console.error("Error fetching menu categories:", error);
-    });
+    const fetchData = async () => {
+      try {
+        const qItems = query(collection(db, 'menuItems'), orderBy('order'));
+        const snapshotItems = await getDocs(qItems);
+        const dbItems = snapshotItems.docs.map(doc => ({ id: doc.id, ...doc.data() }) as MenuItem);
+        setFirebaseItems(dbItems);
 
-    return () => {
-      unsubscribeItems();
-      unsubscribeCategories();
+        const qCategories = query(collection(db, 'menuCategories'), orderBy('order'));
+        const snapshotCategories = await getDocs(qCategories);
+        const dbCategories = snapshotCategories.docs.map(doc => ({ id: doc.id, ...doc.data() }) as MenuCategory);
+        setFirebaseCategories(dbCategories);
+      } catch (error) {
+        console.error("Error fetching menu data:", error);
+      }
     };
+
+    fetchData();
   }, []);
 
   const getItemsForCategory = (categoryId: string) => {

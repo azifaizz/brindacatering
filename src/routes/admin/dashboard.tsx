@@ -85,9 +85,18 @@ function AdminDashboard() {
     setIsItemDialogOpen(true);
   };
 
-  const handleDeleteItem = async (id: string) => {
+  const handleDeleteItem = async (item: MenuItem) => {
     if (confirm('Are you sure you want to delete this item?')) {
-      await deleteDoc(doc(db!, 'menuItems', id));
+      try {
+        await deleteDoc(doc(db!, 'menuItems', item.id));
+        if (item.image && item.image.includes('firebasestorage.googleapis.com') && storage) {
+          const fileRef = ref(storage, item.image);
+          await deleteObject(fileRef).catch(e => console.error("Could not delete image from storage", e));
+        }
+      } catch (err) {
+        console.error("Failed to delete item:", err);
+        alert("Failed to delete item.");
+      }
     }
   };
 
@@ -98,17 +107,6 @@ function AdminDashboard() {
       let imageUrl = formData.image;
 
       if (imageFile && storage) {
-        // Delete old image if it exists and is a Firebase storage URL
-        if (formData.image && formData.image.includes('firebasestorage.googleapis.com')) {
-          try {
-            const oldRef = ref(storage, formData.image);
-            await deleteObject(oldRef);
-            console.log('Deleted old image');
-          } catch (err) {
-            console.error('Failed to delete old image:', err);
-          }
-        }
-        
         const storageRef = ref(storage, `menu-images/${Date.now()}_${imageFile.name}`);
         const snapshot = await uploadBytes(storageRef, imageFile);
         imageUrl = await getDownloadURL(snapshot.ref);
@@ -118,6 +116,26 @@ function AdminDashboard() {
         ...formData,
         image: imageUrl || '',
       };
+
+      // Cleanup old image if we are editing an existing item and the image changed
+      if (editingId) {
+        const originalItem = items.find(i => i.id === editingId);
+        if (
+          originalItem && 
+          originalItem.image && 
+          originalItem.image !== finalData.image && 
+          originalItem.image.includes('firebasestorage.googleapis.com') && 
+          storage
+        ) {
+          try {
+            const oldRef = ref(storage, originalItem.image);
+            await deleteObject(oldRef);
+            console.log('Deleted old image');
+          } catch (err) {
+            console.error('Failed to delete old image:', err);
+          }
+        }
+      }
 
       if (editingId) {
         await updateDoc(doc(db!, 'menuItems', editingId), finalData);
@@ -402,7 +420,7 @@ function AdminDashboard() {
                             <Button variant="ghost" size="icon" className="h-8 w-8 text-primary hover:text-primary hover:bg-primary/10" onClick={() => openEditItem(item)}>
                               <Pencil className="w-4 h-4" />
                             </Button>
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10" onClick={() => handleDeleteItem(item.id)}>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10" onClick={() => handleDeleteItem(item)}>
                               <Trash2 className="w-4 h-4" />
                             </Button>
                           </div>
