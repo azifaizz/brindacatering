@@ -1,5 +1,7 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Your web app's Firebase configuration
@@ -20,6 +22,12 @@ export const app = (firebaseConfig.projectId && getApps().length === 0)
 
 // Initialize Firestore
 export const db = app ? getFirestore(app) : null;
+
+// Initialize Auth
+export const auth = app ? getAuth(app) : null;
+
+// Initialize Storage
+export const storage = app ? getStorage(app) : null;
 
 // Initialize Analytics (only if supported in the environment, e.g. not during SSR)
 export const analytics = app ? isSupported().then(yes => yes ? getAnalytics(app) : null) : null;

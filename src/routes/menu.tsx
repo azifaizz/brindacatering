@@ -3,8 +3,11 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { FinalCTA } from "@/components/site/FinalCTA";
-import { itemsByCategory, menuCategories } from "@/data/menu";
+import { itemsByCategory, menuCategories as defaultCategories, MenuItem, MenuCategory } from "@/data/menu";
 import feastImage from "@/assets/premium-feast.jpg";
+import { useState, useEffect } from "react";
+import { db } from "@/lib/firebase";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 export const Route = createFileRoute("/menu")({
   component: MenuPage,
@@ -31,6 +34,48 @@ export const Route = createFileRoute("/menu")({
 });
 
 function MenuPage() {
+  const [firebaseItems, setFirebaseItems] = useState<MenuItem[] | null>(null);
+  const [firebaseCategories, setFirebaseCategories] = useState<MenuCategory[]>(defaultCategories);
+
+  useEffect(() => {
+    if (!db) return;
+    const qItems = query(collection(db, 'menuItems'), orderBy('order'));
+    const unsubscribeItems = onSnapshot(qItems, (snapshot) => {
+      const data = snapshot.docs.map(doc => doc.data() as MenuItem);
+      setFirebaseItems(data);
+    }, (error) => {
+      console.error("Error fetching menu items:", error);
+    });
+
+    const qCategories = query(collection(db, 'menuCategories'), orderBy('order'));
+    const unsubscribeCategories = onSnapshot(qCategories, (snapshot) => {
+      if (!snapshot.empty) {
+        const dbCategories = snapshot.docs.map(doc => doc.data() as MenuCategory);
+        
+        // Gracefully merge any missing default categories so the UI never breaks
+        const existingIds = new Set(dbCategories.map(c => c.id));
+        const missingDefaults = defaultCategories.filter(c => !existingIds.has(c.id));
+        const combined = [...dbCategories, ...missingDefaults].sort((a, b) => (a.order || 0) - (b.order || 0));
+        
+        setFirebaseCategories(combined);
+      }
+    }, (error) => {
+      console.error("Error fetching menu categories:", error);
+    });
+
+    return () => {
+      unsubscribeItems();
+      unsubscribeCategories();
+    };
+  }, []);
+
+  const getItemsForCategory = (categoryId: string) => {
+    if (firebaseItems !== null) {
+      return firebaseItems.filter(item => item.category === categoryId);
+    }
+    return itemsByCategory(categoryId);
+  };
+
   return (
     <>
       <PageHero
@@ -44,8 +89,8 @@ function MenuPage() {
       <section className="bg-background">
         <div className="mx-auto max-w-[1600px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
           <div className="space-y-32">
-            {menuCategories.map((category) => {
-              const items = itemsByCategory(category.id);
+            {firebaseCategories.map((category) => {
+              const items = getItemsForCategory(category.id);
               return (
                 <section
                   key={category.id}
@@ -67,16 +112,21 @@ function MenuPage() {
 
                   {items.length ? (
                     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                      {items.map((item, itemIndex) => (
+                      {items.map((item, itemIndex) => {
+                        const displayImage = item.image?.startsWith('/src/assets/')
+                          ? item.image.replace('/src/assets/', '/assets/')
+                          : item.image;
+                          
+                        return (
                         <Reveal
                           key={item.id}
                           delay={(itemIndex % 4) * 80}
                           className="group flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm transition-all hover:shadow-md"
                         >
-                          {item.image ? (
+                          {displayImage ? (
                             <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                               <img
-                                src={item.image}
+                                src={displayImage}
                                 alt={item.name}
                                 loading="lazy"
                                 decoding="async"
@@ -110,7 +160,8 @@ function MenuPage() {
                             </p>
                           </div>
                         </Reveal>
-                      ))}
+                        );
+                      })}
                     </div>
                   ) : (
                     <p className="rounded-xl border border-dashed border-border/60 p-12 text-center text-sm text-muted-foreground">
@@ -127,7 +178,7 @@ function MenuPage() {
       <FinalCTA 
         title="Need a Menu for Your Event?"
         description="Whether you're planning an intimate gathering or a grand wedding, we can shape a custom catering package around your unique requirements."
-        buttonText="Get a Catering Quote"
+        primaryCtaLabel="Get a Catering Quote"
       />
     </>
   );

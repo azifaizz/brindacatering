@@ -17,8 +17,9 @@ export type MenuCategory = {
   id: string;
   name: string;
   description: string;
-  image: string;
-  alt: string;
+  image?: string;
+  alt?: string;
+  order?: number; // Also adding order to be safe for sorting
 };
 
 export type MenuItem = {
@@ -29,6 +30,7 @@ export type MenuItem = {
   image?: string;
   price?: string;
   tags?: MenuTag[];
+  order?: number;
 };
 
 export const menuCategories: MenuCategory[] = [
@@ -38,6 +40,7 @@ export const menuCategories: MenuCategory[] = [
     description: "Classic morning favourites and traditional tiffin items.",
     image: tiffinImage,
     alt: "South Indian tiffin spread with idli, dosa, and vada",
+    order: 0,
   },
   {
     id: "lunch",
@@ -45,6 +48,7 @@ export const menuCategories: MenuCategory[] = [
     description: "Authentic vegetarian rice preparations, curries and vegetable sides.",
     image: feastImage,
     alt: "South Indian vegetarian lunch feast",
+    order: 1,
   },
   {
     id: "non-veg",
@@ -52,6 +56,7 @@ export const menuCategories: MenuCategory[] = [
     description: "Premium chicken, mutton and seafood specialties.",
     image: nonVegImage,
     alt: "Non-vegetarian South Indian dishes",
+    order: 2,
   },
   {
     id: "dinner",
@@ -59,6 +64,7 @@ export const menuCategories: MenuCategory[] = [
     description: "Layered parottas, soft kal dosas, and evening specialties.",
     image: functionImage,
     alt: "South Indian dinner items",
+    order: 3,
   },
   {
     id: "sweets",
@@ -66,6 +72,7 @@ export const menuCategories: MenuCategory[] = [
     description: "Traditional South Indian sweets and desserts.",
     image: payasamImage,
     alt: "South Indian sweets",
+    order: 4,
   },
 ];
 
