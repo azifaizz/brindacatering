@@ -394,7 +394,7 @@ function AdminDashboard() {
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="text-destructive hover:text-destructive hover:bg-destructive/10 opacity-0 group-hover/cat:opacity-100 transition-opacity" 
+                        className="text-destructive hover:text-destructive hover:bg-destructive/10 opacity-100 lg:opacity-0 lg:group-hover/cat:opacity-100 transition-opacity" 
                         onClick={() => handleDeleteCategory(category.id, category.name)}
                         title="Delete Category"
                       >
@@ -416,7 +416,7 @@ function AdminDashboard() {
                           delay={(itemIndex % 4) * 80}
                           className="group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm transition-all hover:shadow-md"
                         >
-                          <div className="absolute top-3 right-3 z-10 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 backdrop-blur-sm p-1.5 rounded-lg border border-border shadow-sm">
+                          <div className="absolute top-3 right-3 z-10 flex gap-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity bg-background/80 backdrop-blur-sm p-1.5 rounded-lg border border-border shadow-sm">
                             <Button variant="ghost" size="icon" className="h-8 w-8 text-primary hover:text-primary hover:bg-primary/10" onClick={() => openEditItem(item)}>
                               <Pencil className="w-4 h-4" />
                             </Button>
