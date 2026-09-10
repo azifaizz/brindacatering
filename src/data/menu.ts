@@ -1,8 +1,8 @@
-import tiffinImage from "@/assets/premium-tiffin.jpg";
-import payasamImage from "@/assets/payasam-south-indian.jpg";
-import feastImage from "@/assets/premium-feast.jpg";
-import functionImage from "@/assets/function-south-indian.jpg";
-import nonVegImage from "@/assets/premium-chettinad.jpg";
+const tiffinImage = "";
+const payasamImage = "";
+const feastImage = "";
+const functionImage = "";
+const nonVegImage = "";
 
 /**
  * MENU CONTENT

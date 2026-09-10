@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useState, useEffect } from 'react';
 import { db, storage, auth } from '@/lib/firebase';
 import { collection, onSnapshot, doc, setDoc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
@@ -131,6 +131,17 @@ function AdminDashboard() {
       let imageUrl = formData.image;
 
       if (imageFile && storage) {
+        // Delete old image if it exists and is a Firebase storage URL
+        if (formData.image && formData.image.includes('firebasestorage.googleapis.com')) {
+          try {
+            const oldRef = ref(storage, formData.image);
+            await deleteObject(oldRef);
+            console.log('Deleted old image');
+          } catch (err) {
+            console.error('Failed to delete old image:', err);
+          }
+        }
+        
         const storageRef = ref(storage, `menu-images/${Date.now()}_${imageFile.name}`);
         const snapshot = await uploadBytes(storageRef, imageFile);
         imageUrl = await getDownloadURL(snapshot.ref);
@@ -331,15 +342,31 @@ function AdminDashboard() {
                       {formData.image && !imageFile && (
                         <img src={formData.image.startsWith('/src/assets/') ? formData.image.replace('/src/assets/', '/assets/') : formData.image} alt="Preview" className="w-16 h-16 object-cover rounded" />
                       )}
-                      <Input 
-                        type="file" 
-                        accept="image/*" 
-                        onChange={e => {
-                          if (e.target.files && e.target.files[0]) {
-                            setImageFile(e.target.files[0]);
-                          }
-                        }}
-                      />
+                      <div className="flex flex-col gap-2 w-full">
+                        <Input 
+                          type="file" 
+                          accept="image/*" 
+                          onChange={e => {
+                            if (e.target.files && e.target.files[0]) {
+                              setImageFile(e.target.files[0]);
+                            }
+                          }}
+                        />
+                        {(formData.image || imageFile) && (
+                          <Button 
+                            type="button" 
+                            variant="destructive" 
+                            size="sm" 
+                            className="w-fit mt-2"
+                            onClick={() => {
+                              setFormData({ ...formData, image: '' });
+                              setImageFile(null);
+                            }}
+                          >
+                            Remove Image
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -426,8 +453,8 @@ function AdminDashboard() {
                               />
                             </div>
                           ) : (
-                             <div className="relative aspect-[4/3] overflow-hidden bg-muted flex items-center justify-center">
-                               <ImageIcon className="w-12 h-12 text-muted-foreground opacity-50" />
+                             <div className="relative aspect-[4/3] overflow-hidden bg-muted/30 flex flex-col items-center justify-center border-b border-border/50">
+                               <span className="text-sm font-medium text-muted-foreground/60">No Image Available</span>
                              </div>
                           )}
                           <div className="flex flex-1 flex-col p-6">
