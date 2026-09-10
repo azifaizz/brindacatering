@@ -18,6 +18,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as MenuRouteImport } from './routes/menu'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminGalleryRouteImport } from './routes/admin/gallery'
 import { Route as ApiPublicEnquiryRouteImport } from './routes/api/public/enquiry'
@@ -67,6 +68,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -95,11 +101,11 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/': typeof AdminIndexRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
@@ -109,6 +115,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/gallery': typeof AdminGalleryRoute
+  '/admin': typeof AdminIndexRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
 export interface FileRoutesById {
@@ -124,6 +131,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/': typeof AdminIndexRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
 export interface FileRouteTypes {
@@ -140,11 +148,11 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admin/dashboard'
     | '/admin/gallery'
+    | '/admin/'
     | '/api/public/enquiry'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/about'
     | '/contact'
     | '/gallery'
@@ -154,6 +162,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admin/dashboard'
     | '/admin/gallery'
+    | '/admin'
     | '/api/public/enquiry'
   id:
     | '__root__'
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admin/dashboard'
     | '/admin/gallery'
+    | '/admin/'
     | '/api/public/enquiry'
   fileRoutesById: FileRoutesById
 }
@@ -249,6 +259,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/dashboard': {
       id: '/admin/dashboard'
       path: '/dashboard'
@@ -276,11 +293,13 @@ declare module '@tanstack/react-router' {
 interface AdminRouteRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminGalleryRoute: typeof AdminGalleryRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
   AdminGalleryRoute: AdminGalleryRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 
 const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
