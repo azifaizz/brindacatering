@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
+import { createFileRoute, Outlet, Link } from '@tanstack/react-router';
 import { auth } from '@/lib/firebase';
 import { useEffect, useState } from 'react';
 
@@ -34,5 +34,36 @@ function AdminLayout() {
     return null;
   }
 
-  return <Outlet />;
+  return (
+    <div className="min-h-screen bg-muted/20">
+      <header className="bg-background border-b border-border sticky top-0 z-40">
+        <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <h1 className="font-display text-xl font-bold tracking-wider">Admin Panel</h1>
+            <nav className="flex items-center gap-4">
+              <Link
+                to="/admin/dashboard"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors [&.active]:text-primary [&.active]:font-bold"
+              >
+                Menu
+              </Link>
+              <Link
+                to="/admin/gallery"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors [&.active]:text-primary [&.active]:font-bold"
+              >
+                Gallery
+              </Link>
+            </nav>
+          </div>
+          <button
+            onClick={() => auth?.signOut()}
+            className="text-sm font-medium text-destructive hover:text-destructive/80 transition-colors"
+          >
+            Sign Out
+          </button>
+        </div>
+      </header>
+      <Outlet />
+    </div>
+  );
 }

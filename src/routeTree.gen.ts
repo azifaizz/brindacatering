@@ -19,6 +19,7 @@ import { Route as MenuRouteImport } from './routes/menu'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as AdminGalleryRouteImport } from './routes/admin/gallery'
 import { Route as AdminMigrateRouteImport } from './routes/admin/migrate'
 import { Route as ApiPublicEnquiryRouteImport } from './routes/api/public/enquiry'
 
@@ -72,6 +73,11 @@ const AdminDashboardRoute = AdminDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminGalleryRoute = AdminGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminMigrateRoute = AdminMigrateRouteImport.update({
   id: '/migrate',
   path: '/migrate',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/gallery': typeof AdminGalleryRoute
   '/admin/migrate': typeof AdminMigrateRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/gallery': typeof AdminGalleryRoute
   '/admin/migrate': typeof AdminMigrateRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/gallery': typeof AdminGalleryRoute
   '/admin/migrate': typeof AdminMigrateRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/admin/dashboard'
+    | '/admin/gallery'
     | '/admin/migrate'
     | '/api/public/enquiry'
   fileRoutesByTo: FileRoutesByTo
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/admin/dashboard'
+    | '/admin/gallery'
     | '/admin/migrate'
     | '/api/public/enquiry'
   id:
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/admin/dashboard'
+    | '/admin/gallery'
     | '/admin/migrate'
     | '/api/public/enquiry'
   fileRoutesById: FileRoutesById
@@ -256,6 +268,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/gallery': {
+      id: '/admin/gallery'
+      path: '/gallery'
+      fullPath: '/admin/gallery'
+      preLoaderRoute: typeof AdminGalleryRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/migrate': {
       id: '/admin/migrate'
       path: '/migrate'
@@ -275,11 +294,13 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminGalleryRoute: typeof AdminGalleryRoute
   AdminMigrateRoute: typeof AdminMigrateRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminGalleryRoute: AdminGalleryRoute,
   AdminMigrateRoute: AdminMigrateRoute,
 }
 

@@ -6,24 +6,27 @@ import payasamImage from "@/assets/payasam-south-indian.jpg";
 import kitchenImage from "@/assets/kitchen-south-indian.jpg";
 import heroPoster from "@/assets/hero-south-indian.jpg";
 
-export type GalleryCategory = "Food" | "Weddings" | "Events" | "Corporate" | "Catering Setup";
+export type GalleryCategoryItem = {
+  id: string;
+  name: string;
+  order: number;
+};
 
 export type GalleryImage = {
   id: string;
   image: string;
   alt: string;
   title: string;
-  category: GalleryCategory;
+  category: string;
   order: number;
 };
 
-export const galleryFilters: Array<"All" | GalleryCategory> = [
-  "All",
-  "Food",
-  "Weddings",
-  "Events",
-  "Corporate",
-  "Catering Setup",
+export const defaultGalleryCategories: GalleryCategoryItem[] = [
+  { id: "food", name: "Food", order: 0 },
+  { id: "weddings", name: "Weddings", order: 1 },
+  { id: "events", name: "Events", order: 2 },
+  { id: "corporate", name: "Corporate", order: 3 },
+  { id: "catering-setup", name: "Catering Setup", order: 4 },
 ];
 
 /** Placeholder imagery — replace with the business's own photographs. */
@@ -33,7 +36,7 @@ export const galleryImages: GalleryImage[] = [
     image: heroPoster,
     alt: "South Indian banana-leaf wedding feast with brass serving vessels",
     title: "A feast ready to serve",
-    category: "Weddings",
+    category: "weddings",
     order: 1,
   },
   {
@@ -41,7 +44,7 @@ export const galleryImages: GalleryImage[] = [
     image: feastImage,
     alt: "Traditional South Indian vegetarian feast served on a banana leaf",
     title: "Traditional feast",
-    category: "Food",
+    category: "food",
     order: 2,
   },
   {
@@ -49,7 +52,7 @@ export const galleryImages: GalleryImage[] = [
     image: weddingImage,
     alt: "Catering staff serving guests a South Indian wedding meal on banana leaves",
     title: "Wedding hospitality",
-    category: "Weddings",
+    category: "weddings",
     order: 3,
   },
   {
@@ -57,7 +60,7 @@ export const galleryImages: GalleryImage[] = [
     image: kitchenImage,
     alt: "Cooks preparing South Indian curries in large catering vessels",
     title: "Preparing at scale",
-    category: "Catering Setup",
+    category: "catering-setup",
     order: 4,
   },
   {
@@ -65,7 +68,7 @@ export const galleryImages: GalleryImage[] = [
     image: eventImage,
     alt: "Traditional South Indian function catering in a busy hall",
     title: "Made for celebrations",
-    category: "Events",
+    category: "events",
     order: 5,
   },
   {
@@ -73,7 +76,7 @@ export const galleryImages: GalleryImage[] = [
     image: payasamImage,
     alt: "Payasam being poured from a brass ladle",
     title: "Payasam service",
-    category: "Food",
+    category: "food",
     order: 6,
   },
   {
@@ -81,7 +84,7 @@ export const galleryImages: GalleryImage[] = [
     image: tiffinImage,
     alt: "South Indian tiffin spread with idli, dosa, vada and appam",
     title: "Breakfast and tiffin",
-    category: "Corporate",
+    category: "corporate",
     order: 7,
   },
   {
@@ -89,7 +92,7 @@ export const galleryImages: GalleryImage[] = [
     image: eventImage,
     alt: "Catering team serving guests at a South Indian function",
     title: "Function service",
-    category: "Food",
+    category: "food",
     order: 8,
   },
 ];
