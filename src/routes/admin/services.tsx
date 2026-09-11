@@ -256,7 +256,17 @@ function AdminServices() {
               </div>
 
               <div className="w-24 h-24 rounded overflow-hidden bg-muted shrink-0">
-                {service.image && <img src={service.image} alt={service.title} className="w-full h-full object-cover" />}
+                {service.image && (
+                  <img 
+                    src={
+                      service.image.startsWith('/src/assets/') 
+                        ? (import.meta.glob('/src/assets/*.{jpg,png,jpeg,webp}', { eager: true, import: 'default' }) as Record<string, string>)[service.image] || service.image
+                        : service.image
+                    } 
+                    alt={service.title} 
+                    className="w-full h-full object-cover" 
+                  />
+                )}
               </div>
               
               <div className="flex-1 min-w-0">

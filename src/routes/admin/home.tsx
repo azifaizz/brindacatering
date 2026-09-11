@@ -335,7 +335,17 @@ function AdminHome() {
               </div>
 
               <div className="w-24 h-24 rounded overflow-hidden bg-muted shrink-0">
-                {highlight.image && <img src={highlight.image} alt={highlight.title} className="w-full h-full object-cover" />}
+                {highlight.image && (
+                  <img 
+                    src={
+                      highlight.image.startsWith('/src/assets/') 
+                        ? (import.meta.glob('/src/assets/*.{jpg,png,jpeg,webp}', { eager: true, import: 'default' }) as Record<string, string>)[highlight.image] || highlight.image
+                        : highlight.image
+                    } 
+                    alt={highlight.title} 
+                    className="w-full h-full object-cover" 
+                  />
+                )}
               </div>
               
               <div className="flex-1 min-w-0">

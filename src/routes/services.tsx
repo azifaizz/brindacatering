@@ -90,7 +90,11 @@ function Services() {
                       className={`overflow-hidden rounded-sm bg-muted ${index % 2 === 1 ? "lg:order-2" : ""}`}
                     >
                       <img
-                        src={service.image}
+                        src={
+                          service.image.startsWith('/src/assets/') 
+                            ? (import.meta.glob('/src/assets/*.{jpg,png,jpeg,webp}', { eager: true, import: 'default' }) as Record<string, string>)[service.image] || service.image
+                            : service.image
+                        } 
                         alt={service.alt || service.title}
                         loading="lazy"
                         decoding="async"
