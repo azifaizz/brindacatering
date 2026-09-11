@@ -81,7 +81,7 @@ function AdminHome() {
     if (!storyImageFile || !storage || !db) return;
     setIsSavingStory(true);
     try {
-      if (ourStoryImage && ourStoryImage.includes('firebasestorage.googleapis.com')) {
+      if (ourStoryImage && ourStoryImage.includes('firebasestorage')) {
         const oldRef = ref(storage, ourStoryImage);
         await deleteObject(oldRef).catch(e => console.log('Old story image cleanup failed', e));
       }
@@ -104,7 +104,7 @@ function AdminHome() {
     if (confirm("Are you sure you want to remove the Our Story image?")) {
       try {
         await deleteDoc(doc(db, 'siteSettings', 'ourStoryImage'));
-        if (ourStoryImage && ourStoryImage.includes('firebasestorage.googleapis.com') && storage) {
+        if (ourStoryImage && ourStoryImage.includes('firebasestorage') && storage) {
           const fileRef = ref(storage, ourStoryImage);
           await deleteObject(fileRef).catch(e => console.error(e));
         }
@@ -137,7 +137,7 @@ function AdminHome() {
     if (confirm(`Are you sure you want to delete ${highlight.title}?`)) {
       try {
         await deleteDoc(doc(db, 'cateringHighlights', highlight.id));
-        if (highlight.image.includes('firebasestorage.googleapis.com') && storage) {
+        if (highlight.image.includes('firebasestorage') && storage) {
           const fileRef = ref(storage, highlight.image);
           await deleteObject(fileRef).catch(e => console.error(e));
         }
@@ -155,7 +155,7 @@ function AdminHome() {
       let imageUrl = formData.image;
 
       if (imageFile && storage) {
-        if (formData.id && formData.image?.includes('firebasestorage.googleapis.com')) {
+        if (formData.id && formData.image?.includes('firebasestorage')) {
            const oldRef = ref(storage, formData.image);
            await deleteObject(oldRef).catch(e => console.log('Old image cleanup failed or not found', e));
         }

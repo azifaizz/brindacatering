@@ -89,7 +89,7 @@ function AdminDashboard() {
     if (confirm('Are you sure you want to delete this item?')) {
       try {
         await deleteDoc(doc(db!, 'menuItems', item.id));
-        if (item.image && item.image.includes('firebasestorage.googleapis.com') && storage) {
+        if (item.image && item.image.includes('firebasestorage') && storage) {
           const fileRef = ref(storage, item.image);
           await deleteObject(fileRef).catch(e => console.error("Could not delete image from storage", e));
         }
@@ -124,7 +124,7 @@ function AdminDashboard() {
           originalItem && 
           originalItem.image && 
           originalItem.image !== finalData.image && 
-          originalItem.image.includes('firebasestorage.googleapis.com') && 
+          originalItem.image.includes('firebasestorage') && 
           storage
         ) {
           try {

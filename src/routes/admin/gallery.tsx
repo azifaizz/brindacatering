@@ -126,7 +126,7 @@ function AdminGallery() {
       try {
         await deleteDoc(doc(db!, 'galleryImages', img.id));
         // Delete from storage if it's a firebase storage url
-        if (img.image.includes('firebasestorage.googleapis.com') && storage) {
+        if (img.image.includes('firebasestorage') && storage) {
           const fileRef = ref(storage, img.image);
           await deleteObject(fileRef).catch(e => console.error("Could not delete from storage", e));
         }

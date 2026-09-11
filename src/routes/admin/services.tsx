@@ -82,7 +82,7 @@ function AdminServices() {
     if (confirm(`Are you sure you want to delete ${service.title}?`)) {
       try {
         await deleteDoc(doc(db, 'services', service.id));
-        if (service.image.includes('firebasestorage.googleapis.com') && storage) {
+        if (service.image && service.image.includes('firebasestorage') && storage) {
           const fileRef = ref(storage, service.image);
           await deleteObject(fileRef).catch(e => console.error(e));
         }
@@ -101,7 +101,7 @@ function AdminServices() {
 
       if (imageFile && storage) {
         // Delete old image if updating and old image is in firebase storage
-        if (formData.id && formData.image?.includes('firebasestorage.googleapis.com')) {
+        if (formData.id && formData.image?.includes('firebasestorage')) {
            const oldRef = ref(storage, formData.image);
            await deleteObject(oldRef).catch(e => console.log('Old image cleanup failed or not found', e));
         }
