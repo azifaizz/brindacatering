@@ -49,6 +49,20 @@ function AdminLayout() {
             </h1>
             <nav className="flex items-center gap-2">
               <Link
+                to="/admin/home"
+                className="text-sm font-medium px-4 py-2 rounded-full text-muted-foreground hover:bg-muted/50 hover:text-foreground transition-all duration-200 [&.active]:bg-primary/10 [&.active]:text-primary [&.active]:font-semibold flex items-center gap-2"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                <span className="hidden sm:inline">Home</span>
+              </Link>
+              <Link
+                to="/admin/services"
+                className="text-sm font-medium px-4 py-2 rounded-full text-muted-foreground hover:bg-muted/50 hover:text-foreground transition-all duration-200 [&.active]:bg-primary/10 [&.active]:text-primary [&.active]:font-semibold flex items-center gap-2"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                <span className="hidden sm:inline">Services</span>
+              </Link>
+              <Link
                 to="/admin/dashboard"
                 className="text-sm font-medium px-4 py-2 rounded-full text-muted-foreground hover:bg-muted/50 hover:text-foreground transition-all duration-200 [&.active]:bg-primary/10 [&.active]:text-primary [&.active]:font-semibold flex items-center gap-2"
               >

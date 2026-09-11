@@ -98,6 +98,37 @@ function RootComponent() {
       </main>
       {!isAdminRoute && <Footer />}
       {!isAdminRoute && <WhatsAppButton />}
+      
+      {!isAdminRoute && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FoodEstablishment",
+              "name": business.name,
+              "image": "https://brindacaterers.com/favicon.ico",
+              "@id": "https://brindacaterers.com",
+              "url": "https://brindacaterers.com",
+              "telephone": business.phone,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": business.addressLines.join(", "),
+                "addressLocality": "Cheyyar",
+                "addressRegion": "TN",
+                "postalCode": "604407",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 12.663573,
+                "longitude": 79.537971
+              },
+              "servesCuisine": "South Indian"
+            })
+          }}
+        />
+      )}
     </QueryClientProvider>
   );
 }

@@ -29,7 +29,7 @@ export const Route = createFileRoute("/contact")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "Brinda Caterers" },
+      { title: "Contact Brinda Caterers | Cheyyar Event Catering" },
       {
         name: "description",
         content:
@@ -37,7 +37,7 @@ export const Route = createFileRoute("/contact")({
       },
       {
         property: "og:title",
-        content: "Contact & Catering Quote — Brinda Caterers",
+        content: "Contact Brinda Caterers | Cheyyar Event Catering",
       },
       {
         property: "og:description",
@@ -46,6 +46,7 @@ export const Route = createFileRoute("/contact")({
       },
       { property: "og:url", content: "/contact" },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
@@ -60,6 +61,32 @@ function Contact() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact Brinda Caterers",
+            "description": "Contact us for authentic South Indian catering quotes.",
+            "url": "https://brindacaterers.com/contact",
+            "mainEntity": {
+              "@type": "LocalBusiness",
+              "name": business.name,
+              "telephone": business.phone,
+              "email": business.email,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": business.addressLines.join(", "),
+                "addressLocality": "Cheyyar",
+                "addressRegion": "TN",
+                "postalCode": "604407",
+                "addressCountry": "IN"
+              }
+            }
+          })
+        }}
+      />
       <PageHero
         eyebrow="Contact"
         title="Let's Plan Your Celebration"

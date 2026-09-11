@@ -93,7 +93,7 @@ export const foodHighlights = [
     image: heroSouthIndian,
   },
   {
-    name: "Chicken, Mutton & Beef",
+    name: "Chicken & Mutton",
     image: functionSouthIndian,
   },
   {

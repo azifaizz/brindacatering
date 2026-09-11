@@ -21,6 +21,8 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminGalleryRouteImport } from './routes/admin/gallery'
+import { Route as AdminHomeRouteImport } from './routes/admin/home'
+import { Route as AdminServicesRouteImport } from './routes/admin/services'
 import { Route as ApiPublicEnquiryRouteImport } from './routes/api/public/enquiry'
 
 const IndexRoute = IndexRouteImport.update({
@@ -83,6 +85,16 @@ const AdminGalleryRoute = AdminGalleryRouteImport.update({
   path: '/gallery',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminHomeRoute = AdminHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminServicesRoute = AdminServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const ApiPublicEnquiryRoute = ApiPublicEnquiryRouteImport.update({
   id: '/api/public/enquiry',
   path: '/api/public/enquiry',
@@ -101,6 +113,8 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/home': typeof AdminHomeRoute
+  '/admin/services': typeof AdminServicesRoute
   '/admin/': typeof AdminIndexRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
@@ -115,6 +129,8 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/home': typeof AdminHomeRoute
+  '/admin/services': typeof AdminServicesRoute
   '/admin': typeof AdminIndexRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
@@ -131,6 +147,8 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/home': typeof AdminHomeRoute
+  '/admin/services': typeof AdminServicesRoute
   '/admin/': typeof AdminIndexRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
@@ -148,6 +166,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admin/dashboard'
     | '/admin/gallery'
+    | '/admin/home'
+    | '/admin/services'
     | '/admin/'
     | '/api/public/enquiry'
   fileRoutesByTo: FileRoutesByTo
@@ -162,6 +182,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admin/dashboard'
     | '/admin/gallery'
+    | '/admin/home'
+    | '/admin/services'
     | '/admin'
     | '/api/public/enquiry'
   id:
@@ -177,6 +199,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admin/dashboard'
     | '/admin/gallery'
+    | '/admin/home'
+    | '/admin/services'
     | '/admin/'
     | '/api/public/enquiry'
   fileRoutesById: FileRoutesById
@@ -280,6 +304,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminGalleryRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/home': {
+      id: '/admin/home'
+      path: '/home'
+      fullPath: '/admin/home'
+      preLoaderRoute: typeof AdminHomeRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/services': {
+      id: '/admin/services'
+      path: '/services'
+      fullPath: '/admin/services'
+      preLoaderRoute: typeof AdminServicesRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/api/public/enquiry': {
       id: '/api/public/enquiry'
       path: '/api/public/enquiry'
@@ -293,12 +331,16 @@ declare module '@tanstack/react-router' {
 interface AdminRouteRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminGalleryRoute: typeof AdminGalleryRoute
+  AdminHomeRoute: typeof AdminHomeRoute
+  AdminServicesRoute: typeof AdminServicesRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
   AdminGalleryRoute: AdminGalleryRoute,
+  AdminHomeRoute: AdminHomeRoute,
+  AdminServicesRoute: AdminServicesRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 

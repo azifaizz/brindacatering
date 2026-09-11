@@ -14,13 +14,13 @@ export const Route = createFileRoute("/about")({
   component: About,
   head: () => ({
     meta: [
-      { title: "Brinda Caterers" },
+      { title: "About Brinda Caterers | Catering in Cheyyar" },
       {
         name: "description",
         content:
           "Learn about Brinda Caterers and our approach to authentic South Indian food, traditional hospitality and organised event service.",
       },
-      { property: "og:title", content: "About — Brinda Caterers" },
+      { property: "og:title", content: "About Brinda Caterers | Catering in Cheyyar" },
       {
         property: "og:description",
         content:
@@ -28,6 +28,7 @@ export const Route = createFileRoute("/about")({
       },
       { property: "og:url", content: "/about" },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/about" }],
@@ -44,6 +45,19 @@ function About() {
         intro="Authentic South Indian catering with a focus on traditional flavours and seamless hospitality."
         image={heroPoster}
         alt="About Brinda Caterers"
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "name": "About Brinda Caterers",
+            "description": aboutPageData.ourStory.intro,
+            "url": "https://brindacaterers.com/about"
+          })
+        }}
       />
 
       {/* 02 — Our Story */}
@@ -82,7 +96,7 @@ function About() {
                 delay={index * 80}
                 className="group relative overflow-hidden rounded-2xl bg-background p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl border border-border/50"
               >
-                <span className="absolute right-6 top-4 font-display text-7xl text-primary transition-colors duration-500 group-hover:text-accent select-none">
+                <span className="absolute right-6 top-4 font-sans font-light text-7xl text-primary transition-colors duration-500 group-hover:text-accent select-none">
                   0{index + 1}
                 </span>
                 <div className="relative z-10">

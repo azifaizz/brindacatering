@@ -1,4 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
+import { db } from "@/lib/firebase";
+import { collection, getDocs, query, orderBy, doc, onSnapshot } from "firebase/firestore";
 import { HeroVideo } from "@/components/site/HeroVideo";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { Reveal } from "@/components/site/Reveal";
@@ -9,7 +12,7 @@ import { FinalCTA } from "@/components/site/FinalCTA";
 import { sortedGallery } from "@/data/gallery";
 import { 
   aboutPageData, 
-  cateringHighlights, 
+  cateringHighlights as initialHighlights, 
   foodHighlights, 
   cateringExperience, 
   celebrationMoments 
@@ -21,7 +24,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Brinda Caterers",
+        title: "Brinda Caterers | Authentic South Indian Catering in Cheyyar & Beyond",
       },
       {
         name: "description",
@@ -39,6 +42,7 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -46,6 +50,37 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const [highlights, setHighlights] = useState(initialHighlights);
+  const [ourStoryImage, setOurStoryImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!db) return;
+    const fetchHighlights = async () => {
+      try {
+        const q = query(collection(db, 'cateringHighlights'), orderBy('order'));
+        const snapshot = await getDocs(q);
+        if (!snapshot.empty) {
+          const dbHighlights = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          // We cast and map to ensure we match the shape expected by the UI
+          setHighlights(dbHighlights as any);
+        }
+      } catch (err) {
+        console.error("Failed to load highlights", err);
+      }
+    };
+    fetchHighlights();
+
+    const unsubscribeStory = onSnapshot(doc(db, 'siteSettings', 'ourStoryImage'), (docSnap) => {
+      if (docSnap.exists()) {
+        setOurStoryImage(docSnap.data().image);
+      } else {
+        setOurStoryImage(null);
+      }
+    });
+
+    return () => unsubscribeStory();
+  }, []);
+
   return (
     <>
       {/* 01 — Hero */}
@@ -57,10 +92,18 @@ function Home() {
           <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
             <Reveal>
               <div className="overflow-hidden rounded-2xl shadow-lg">
-                <div className="flex aspect-[4/3] w-full flex-col items-center justify-center bg-muted/50 transition-transform duration-[1200ms] hover:scale-105 border-2 border-dashed border-border/50">
-                  <span className="font-display text-2xl text-muted-foreground">Master Photo / Logo Placeholder</span>
-                  <span className="mt-2 text-sm uppercase tracking-widest text-muted-foreground">Upload Image Here</span>
-                </div>
+                {ourStoryImage ? (
+                  <img
+                    src={ourStoryImage}
+                    alt="Our Story"
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex aspect-[4/3] w-full flex-col items-center justify-center bg-muted/50 transition-transform duration-[1200ms] hover:scale-105 border-2 border-dashed border-border/50">
+                    <span className="font-display text-2xl text-muted-foreground">Master Photo / Logo Placeholder</span>
+                    <span className="mt-2 text-sm uppercase tracking-widest text-muted-foreground">Upload Image Here</span>
+                  </div>
+                )}
               </div>
             </Reveal>
             <Reveal delay={100} className="flex flex-col justify-center">
@@ -89,17 +132,17 @@ function Home() {
             intro="Professional service shaped around the scale and traditions of your occasion."
           />
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {cateringHighlights.map((highlight, index) => (
+            {highlights.map((highlight: any, index: number) => (
               <Reveal
                 as="article"
-                key={highlight.title}
+                key={highlight.title || highlight.id}
                 delay={index * 100}
                 className="group relative overflow-hidden rounded-2xl shadow-sm"
               >
                 <div className="aspect-[3/4] w-full overflow-hidden">
                   <img
                     src={highlight.image}
-                    alt=""
+                    alt={highlight.title}
                     loading="lazy"
                     decoding="async"
                     className="h-full w-full object-cover transition-transform duration-[2000ms] group-hover:scale-105"
@@ -168,7 +211,7 @@ function Home() {
                 delay={index * 100}
                 className="group flex flex-col sm:flex-row items-start gap-6 sm:gap-8 border-t border-border/20 py-12 transition-colors hover:border-gold/40"
               >
-                <span className="font-display text-5xl sm:text-7xl text-primary-foreground/50 transition-colors group-hover:text-accent shrink-0">
+                <span className="font-sans font-light text-5xl sm:text-7xl text-primary-foreground/50 transition-colors group-hover:text-accent shrink-0">
                   {exp.step}
                 </span>
                 <div className="pt-2">

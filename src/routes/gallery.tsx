@@ -19,19 +19,20 @@ export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
   head: () => ({
     meta: [
-      { title: "Brinda Caterers" },
+      { title: "Gallery — Brinda Caterers | Cheyyar" },
       {
         name: "description",
         content:
           "South Indian food, wedding service, function catering and large-scale preparation from Brinda Caterers.",
       },
-      { property: "og:title", content: "Gallery — Brinda Caterers" },
+      { property: "og:title", content: "Gallery — Brinda Caterers | Cheyyar" },
       {
         property: "og:description",
         content: "Food, wedding catering, event setups and corporate catering photography.",
       },
       { property: "og:url", content: "/gallery" },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/gallery" }],

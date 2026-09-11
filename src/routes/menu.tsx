@@ -13,13 +13,13 @@ export const Route = createFileRoute("/menu")({
   component: MenuPage,
   head: () => ({
     meta: [
-      { title: "Brinda Caterers" },
+      { title: "Catering Menu — Brinda Caterers | Cheyyar, TN" },
       {
         name: "description",
         content:
           "Explore South Indian vegetarian, non-vegetarian, tiffin, sweets and celebration menu directions, customised to your occasion.",
       },
-      { property: "og:title", content: "Catering Menu — Brinda Caterers" },
+      { property: "og:title", content: "Catering Menu — Brinda Caterers | Cheyyar, TN" },
       {
         property: "og:description",
         content:
@@ -27,6 +27,7 @@ export const Route = createFileRoute("/menu")({
       },
       { property: "og:url", content: "/menu" },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/menu" }],
@@ -68,10 +69,22 @@ function MenuPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Menu",
+            "name": "Brinda Caterers Catering Menu",
+            "description": "Authentic South Indian catering menus for events.",
+            "url": "https://brindacaterers.com/menu",
+            "mainEntityOfPage": "https://brindacaterers.com/menu"
+          })
+        }}
+      />
       <PageHero
         eyebrow="Menu"
-        title="A Taste of South Indian Tradition"
-        intro="These categories show the direction of our menus — every dish and service detail is confirmed with you."
+        title="A Taste of South Indian Tradition"
         image={feastImage}
         alt="Traditional South Indian vegetarian feast served on a banana leaf"
       />
