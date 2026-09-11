@@ -67,6 +67,7 @@ function AdminServices() {
       try {
         for (let i = 0; i < defaultServices.length; i++) {
           const s = defaultServices[i];
+          if (!s) continue;
           await setDoc(doc(db, 'services', s.id), { ...s, order: i });
         }
         alert("Services imported successfully!");
@@ -142,17 +143,21 @@ function AdminServices() {
     const newServices = [...services];
     const targetIndex = direction === 'up' ? index - 1 : index + 1;
     
-    // Swap order values
-    const currentOrder = newServices[index].order ?? index;
-    const targetOrder = newServices[targetIndex].order ?? targetIndex;
+    const currentItem = newServices[index];
+    const targetItem = newServices[targetIndex];
+    if (!currentItem || !targetItem || !db) return;
     
-    newServices[index].order = targetOrder;
-    newServices[targetIndex].order = currentOrder;
+    // Swap order values
+    const currentOrder = currentItem.order ?? index;
+    const targetOrder = targetItem.order ?? targetIndex;
+    
+    currentItem.order = targetOrder;
+    targetItem.order = currentOrder;
 
     // Save to DB
     try {
-      await updateDoc(doc(db, 'services', newServices[index].id), { order: newServices[index].order });
-      await updateDoc(doc(db, 'services', newServices[targetIndex].id), { order: newServices[targetIndex].order });
+      await updateDoc(doc(db, 'services', currentItem.id), { order: currentItem.order });
+      await updateDoc(doc(db, 'services', targetItem.id), { order: targetItem.order });
     } catch (error) {
       console.error("Failed to reorder", error);
     }

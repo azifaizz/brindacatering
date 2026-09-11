@@ -49,12 +49,12 @@ function GalleryPage() {
 
     const fetchData = async () => {
       try {
-        const qCategories = query(collection(db, 'galleryCategories'), orderBy('order'));
+        const qCategories = query(collection(db!, 'galleryCategories'), orderBy('order'));
         const snapshotCategories = await getDocs(qCategories);
         const dbCategories = snapshotCategories.docs.map(doc => ({ id: doc.id, ...doc.data() }) as GalleryCategoryItem);
         setCategories(dbCategories);
 
-        const qImages = query(collection(db, 'galleryImages'), orderBy('order'));
+        const qImages = query(collection(db!, 'galleryImages'), orderBy('order'));
         const snapshotImages = await getDocs(qImages);
         const dbImages = snapshotImages.docs.map(doc => ({ id: doc.id, ...doc.data() }) as GalleryImage);
         setImages(dbImages);

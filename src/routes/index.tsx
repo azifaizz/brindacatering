@@ -57,7 +57,7 @@ function Home() {
     if (!db) return;
     const fetchHighlights = async () => {
       try {
-        const q = query(collection(db, 'cateringHighlights'), orderBy('order'));
+        const q = query(collection(db!, 'cateringHighlights'), orderBy('order'));
         const snapshot = await getDocs(q);
         if (!snapshot.empty) {
           const dbHighlights = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -72,7 +72,7 @@ function Home() {
 
     const unsubscribeStory = onSnapshot(doc(db, 'siteSettings', 'ourStoryImage'), (docSnap) => {
       if (docSnap.exists()) {
-        setOurStoryImage(docSnap.data().image);
+        setOurStoryImage(docSnap.data()?.['image']);
       } else {
         setOurStoryImage(null);
       }

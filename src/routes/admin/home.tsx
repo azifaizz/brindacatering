@@ -193,15 +193,19 @@ function AdminHome() {
     const newHighlights = [...highlights];
     const targetIndex = direction === 'up' ? index - 1 : index + 1;
     
-    const currentOrder = newHighlights[index].order ?? index;
-    const targetOrder = newHighlights[targetIndex].order ?? targetIndex;
+    const currentItem = newHighlights[index];
+    const targetItem = newHighlights[targetIndex];
+    if (!currentItem || !targetItem) return;
     
-    newHighlights[index].order = targetOrder;
-    newHighlights[targetIndex].order = currentOrder;
+    const currentOrder = currentItem.order ?? index;
+    const targetOrder = targetItem.order ?? targetIndex;
+    
+    currentItem.order = targetOrder;
+    targetItem.order = currentOrder;
 
     try {
-      await updateDoc(doc(db, 'cateringHighlights', newHighlights[index].id), { order: newHighlights[index].order });
-      await updateDoc(doc(db, 'cateringHighlights', newHighlights[targetIndex].id), { order: newHighlights[targetIndex].order });
+      await updateDoc(doc(db, 'cateringHighlights', currentItem.id), { order: currentItem.order });
+      await updateDoc(doc(db, 'cateringHighlights', targetItem.id), { order: targetItem.order });
     } catch (error) {
       console.error("Failed to reorder", error);
     }
