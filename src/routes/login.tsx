@@ -36,40 +36,45 @@ function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-card p-8 rounded-lg shadow-lg border border-border">
-        <h1 className="text-3xl font-serif text-primary text-center mb-6">Admin Login</h1>
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 selection:bg-primary/20">
+      <div className="w-full max-w-[380px] space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="text-center space-y-2">
+          <h1 className="text-4xl font-display tracking-tight text-primary">Brinda Caterers</h1>
+          <p className="text-sm text-muted-foreground tracking-wide uppercase">Secure Admin Portal</p>
+        </div>
         
         {error && (
-          <div className="bg-destructive/10 text-destructive p-3 rounded mb-4 text-sm">
+          <div className="bg-destructive/5 text-destructive/90 p-3 rounded-md text-sm text-center border border-destructive/20 animate-in fade-in zoom-in-95">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
+        <form onSubmit={handleLogin} className="space-y-5">
+          <div className="space-y-2">
             <Input 
               type="email" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
               required 
-              placeholder="admin@brindhacaterings.com"
+              placeholder="Email address"
+              className="h-12 px-4 bg-muted/30 border-border/40 focus:border-primary/50 focus:bg-transparent text-base transition-all rounded-lg"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Password</label>
+          <div className="space-y-2">
             <Input 
               type="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
               required 
-              placeholder="••••••••"
+              placeholder="Password"
+              className="h-12 px-4 bg-muted/30 border-border/40 focus:border-primary/50 focus:bg-transparent text-base transition-all rounded-lg"
             />
           </div>
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
-          </Button>
+          <div className="pt-2">
+            <Button type="submit" className="w-full h-12 text-base font-medium rounded-lg transition-transform active:scale-[0.98]" disabled={loading}>
+              {loading ? 'Authenticating...' : 'Sign In'}
+            </Button>
+          </div>
         </form>
       </div>
     </div>
