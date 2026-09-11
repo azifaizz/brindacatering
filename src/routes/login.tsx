@@ -25,11 +25,7 @@ function AdminLogin() {
       await signInWithEmailAndPassword(auth, email, password);
       navigate({ to: '/admin/dashboard' });
     } catch (err: any) {
-      if (err.code === 'auth/invalid-credential' || err.message?.includes('auth/invalid-credential')) {
-        setError('LOGIN ERROR');
-      } else {
-        setError(err.message || 'Failed to login');
-      }
+      setError('Invalid admin credentials.');
     } finally {
       setLoading(false);
     }
