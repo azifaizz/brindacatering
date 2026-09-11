@@ -306,7 +306,7 @@ function AdminGallery() {
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      className="text-destructive hover:text-destructive hover:bg-destructive/10 opacity-100 lg:opacity-0 lg:group-hover/cat:opacity-100 transition-opacity" 
+                      className="text-destructive hover:text-destructive hover:bg-destructive/10 transition-opacity" 
                       onClick={() => handleDeleteCategory(category.id, category.name)}
                       title="Delete Category"
                     >
@@ -331,7 +331,7 @@ function AdminGallery() {
                               <span className="text-sm font-medium text-muted-foreground/60">No Image Available</span>
                             </div>
                           )}
-                          <div className="absolute inset-0 bg-black/40 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
+                          <div className="absolute inset-0 bg-black/40 transition-opacity flex flex-col items-center justify-center gap-2">
                             <Button variant="destructive" size="sm" onClick={() => handleDeleteImage(img)}>
                               <Trash2 className="w-4 h-4 mr-2" /> Delete
                             </Button>
