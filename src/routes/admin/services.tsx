@@ -62,11 +62,12 @@ function AdminServices() {
   };
 
   const handleSeed = async () => {
+    if (!db) return;
     if (confirm("Import initial services? This will add the hardcoded services to the database.")) {
       try {
         for (let i = 0; i < defaultServices.length; i++) {
           const s = defaultServices[i];
-          await setDoc(doc(db!, 'services', s.id), { ...s, order: i });
+          await setDoc(doc(db, 'services', s.id), { ...s, order: i });
         }
         alert("Services imported successfully!");
       } catch (err) {
@@ -77,9 +78,10 @@ function AdminServices() {
   };
 
   const handleDelete = async (service: Service) => {
+    if (!db) return;
     if (confirm(`Are you sure you want to delete ${service.title}?`)) {
       try {
-        await deleteDoc(doc(db!, 'services', service.id));
+        await deleteDoc(doc(db, 'services', service.id));
         if (service.image.includes('firebasestorage.googleapis.com') && storage) {
           const fileRef = ref(storage, service.image);
           await deleteObject(fileRef).catch(e => console.error(e));
@@ -92,6 +94,7 @@ function AdminServices() {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!db) return;
     setIsSaving(true);
     try {
       let imageUrl = formData.image;
@@ -121,7 +124,7 @@ function AdminServices() {
         order: formData.order ?? services.length,
       };
 
-      await setDoc(doc(db!, 'services', finalId), finalData);
+      await setDoc(doc(db, 'services', finalId), finalData);
       setIsDialogOpen(false);
       resetForm();
     } catch (error) {
@@ -133,6 +136,7 @@ function AdminServices() {
   };
 
   const moveItem = async (index: number, direction: 'up' | 'down') => {
+    if (!db) return;
     if ((direction === 'up' && index === 0) || (direction === 'down' && index === services.length - 1)) return;
     
     const newServices = [...services];
@@ -147,8 +151,8 @@ function AdminServices() {
 
     // Save to DB
     try {
-      await updateDoc(doc(db!, 'services', newServices[index].id), { order: newServices[index].order });
-      await updateDoc(doc(db!, 'services', newServices[targetIndex].id), { order: newServices[targetIndex].order });
+      await updateDoc(doc(db, 'services', newServices[index].id), { order: newServices[index].order });
+      await updateDoc(doc(db, 'services', newServices[targetIndex].id), { order: newServices[targetIndex].order });
     } catch (error) {
       console.error("Failed to reorder", error);
     }

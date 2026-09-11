@@ -100,9 +100,10 @@ function AdminHome() {
   };
 
   const handleDeleteStoryImage = async () => {
+    if (!db) return;
     if (confirm("Are you sure you want to remove the Our Story image?")) {
       try {
-        await deleteDoc(doc(db!, 'siteSettings', 'ourStoryImage'));
+        await deleteDoc(doc(db, 'siteSettings', 'ourStoryImage'));
         if (ourStoryImage && ourStoryImage.includes('firebasestorage.googleapis.com') && storage) {
           const fileRef = ref(storage, ourStoryImage);
           await deleteObject(fileRef).catch(e => console.error(e));
@@ -115,12 +116,13 @@ function AdminHome() {
   };
 
   const handleSeed = async () => {
+    if (!db) return;
     if (confirm("Import initial highlights? This will add the hardcoded highlights to the database.")) {
       try {
         for (let i = 0; i < defaultHighlights.length; i++) {
           const h = defaultHighlights[i];
           const finalId = `hlt-${Date.now()}-${i}`;
-          await setDoc(doc(db!, 'cateringHighlights', finalId), { ...h, id: finalId, order: i });
+          await setDoc(doc(db, 'cateringHighlights', finalId), { ...h, id: finalId, order: i });
         }
         alert("Highlights imported successfully!");
       } catch (err) {
@@ -131,9 +133,10 @@ function AdminHome() {
   };
 
   const handleDelete = async (highlight: Highlight) => {
+    if (!db) return;
     if (confirm(`Are you sure you want to delete ${highlight.title}?`)) {
       try {
-        await deleteDoc(doc(db!, 'cateringHighlights', highlight.id));
+        await deleteDoc(doc(db, 'cateringHighlights', highlight.id));
         if (highlight.image.includes('firebasestorage.googleapis.com') && storage) {
           const fileRef = ref(storage, highlight.image);
           await deleteObject(fileRef).catch(e => console.error(e));
@@ -146,6 +149,7 @@ function AdminHome() {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!db) return;
     setIsSaving(true);
     try {
       let imageUrl = formData.image;
@@ -171,7 +175,7 @@ function AdminHome() {
         order: formData.order ?? highlights.length,
       };
 
-      await setDoc(doc(db!, 'cateringHighlights', finalId), finalData);
+      await setDoc(doc(db, 'cateringHighlights', finalId), finalData);
       setIsDialogOpen(false);
       resetForm();
     } catch (error) {
@@ -183,6 +187,7 @@ function AdminHome() {
   };
 
   const moveItem = async (index: number, direction: 'up' | 'down') => {
+    if (!db) return;
     if ((direction === 'up' && index === 0) || (direction === 'down' && index === highlights.length - 1)) return;
     
     const newHighlights = [...highlights];
@@ -195,8 +200,8 @@ function AdminHome() {
     newHighlights[targetIndex].order = currentOrder;
 
     try {
-      await updateDoc(doc(db!, 'cateringHighlights', newHighlights[index].id), { order: newHighlights[index].order });
-      await updateDoc(doc(db!, 'cateringHighlights', newHighlights[targetIndex].id), { order: newHighlights[targetIndex].order });
+      await updateDoc(doc(db, 'cateringHighlights', newHighlights[index].id), { order: newHighlights[index].order });
+      await updateDoc(doc(db, 'cateringHighlights', newHighlights[targetIndex].id), { order: newHighlights[targetIndex].order });
     } catch (error) {
       console.error("Failed to reorder", error);
     }

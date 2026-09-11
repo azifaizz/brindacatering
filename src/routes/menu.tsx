@@ -42,6 +42,7 @@ function MenuPage() {
     if (!db) return;
 
     const fetchData = async () => {
+      if (!db) return;
       try {
         const qItems = query(collection(db, 'menuItems'), orderBy('order'));
         const snapshotItems = await getDocs(qItems);

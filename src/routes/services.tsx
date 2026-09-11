@@ -46,6 +46,7 @@ function Services() {
   useEffect(() => {
     if (!db) return;
     const fetchServices = async () => {
+      if (!db) return;
       try {
         const q = query(collection(db, 'services'), orderBy('order'));
         const snapshot = await getDocs(q);
