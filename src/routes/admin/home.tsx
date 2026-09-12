@@ -50,7 +50,7 @@ function AdminHome() {
 
     const unsubscribeStory = onSnapshot(doc(db, 'siteSettings', 'ourStoryImage'), (docSnap) => {
       if (docSnap.exists()) {
-        setOurStoryImage(docSnap.data().image);
+        setOurStoryImage(docSnap.data()['image']);
       }
     });
 
